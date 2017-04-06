@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>LEGOlord208 - design</title>
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+		<link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+		<link rel="manifest" href="/manifest.json">
+		<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+		<meta name="theme-color" content="#ffffff">
+
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/main.css" rel="stylesheet" type="text/css" />
+
+		<script src="/assets/js/jquery.js"></script>
+		<script src="/assets/js/main.js"></script>
+		<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-90747384-1', 'auto');
+		ga('send', 'pageview');
+		</script>
+
+		
+	</head>
+	<body>
+		<img src="/assets/images/icon.png" id="icon" alt="Profile Picture" />
+
+		<div id="imgzoom">
+			<img alt="Zoomed image." />
+		</div>
+
+		<div id="dim"></div>
+		<div id="cookies">
+			Some annoying EU rule forces me to tell you<br />
+			we might use cookies. The funny thing is by entering<br />
+			most pages, it's already too late. So completely<br />
+			useless. <b>Good job, EU</b><br />
+			Cookies are nothing dangerous and is just a way to<br />
+			store data on your machine. Otherwise, how do we<br />
+			know you are you?<br /><br />
+			<button>Got it</button>
+		</div>
+
+		<h1 id="title">LEGOlord208</h1>
+		<div id="menuPlaceholder">
+			<ul id="menu">
+				<li class="important"><a href="/">Home</a></li>
+				<li><a href="history">History</a></li>
+				<li class="important"><a href="software">Software</a></li>
+				<li><a href="libs">Libraries</a></li>
+				<li><a href="contact">Contact</a></li>
+			</ul>
+		</div>
+
+		<div id="contents">
+			<h1>Animation and Design Library</h1>
+<h1><a href="files/Animation%20and%20Design%20Library.jar" download>Download</a></h1>
+
+<p><i>Work with Java Swing components in a cleaner and faster way!</i></p>
+
+<p>The Animation and Design Library is a bit like jQuery for Java.<br />
+Write <code>element.<i>fadeOut()</i>;</code> instead of creating boring and time wasting <code><b>while</b></code> loops.</p>
+
+<h1>Documentation:</h1>
+<p>In this documentation we will be making a demo application.</p>
+<p><b><i>WARNING: This documentation was made for an older version of this library.<br />
+		It has been updated but might not be 100% correct</i></b></p>
+<p>
+Animation and Design Library let's you use the normal Swing. This means, it will look the same.
+But if you want it to look like Windows there is a trick with <code>UIManager</code> you can use.
+However, we did it for you! All you have to do is to write <code>DesignLib.makeOsLookAndFeel();</code>.
+</p>
+<p>
+Now let's make our frame. As said above we use Swing, but when you create Frames we have a few tweaks ;)
+We suggest you use <code>Frame</code>. But IMPORTANT! Take the <i>one.krake</i> import!
+<code>Frame f = Frames.newFrame("Pigs: The history behind these wild animals");</code>
+Now, to this method there is various parameters to change the size and such, but the default size is 500x500.
+</p>
+<p>
+Here comes two normal Swing lines we'll just dump here.
+I already know I suck at making documentations, thanks.
+<code>f.setLayout(new FlowLayout());<br />
+	JLabel l = new JLabel("The story of the world's most dangerous animals");</code>
+</p>
+<p>
+Now comes the fun part! Let's make our <code>JLabel</code> into our new, cleaner component: <code>DC</code>,
+short for <i>Design Component</i>.
+Do this via <code>DC c = DesignLib.$(l);</code>. One thing! You <i>could</i> actually just do
+<code>DC c = DesignLib.$(new JLabel("The story of the world's most dangerous animals"));</code>, all in one line.
+We will do that later, and with our <code>DC</code> it's quite few times we actually need the old component.
+Especially since you can do <code>c.getComponent();</code> to get the good old Java component, which is usually enough.
+</p>
+<p>
+With our <code>DC</code> we will now change font.
+Do <code>c.font(20);</code> to make it bigger. Here are some methods that exist with fonts:</p>
+<ul>
+	<li><code>DC#font(Font f)</code>, returns <code>DC</code></li>
+	<li><code>DC#font(String name, int style, int size)</code>, returns <code>DC</code></li>
+	<li><code>DC#font(int style, int size)</code>, returns <code>DC</code></li>
+	<li><code>DC#font(int size)</code>, returns <code>DC</code></li>
+	<li><code>DC#font()</code>, returns <code>Font</code></li>
+</ul><p>
+Noticed that all of them (except one, which returns the font) return <code>DC</code>s? It's because you can stack many
+of the methods up. Such as <code>frame.add(DesignLib.$(new JLabel("Hi")).font(20).getComponent());</code>. All in a nice,
+beutiful line!
+</p>
+<p>
+Now let's add it to the screen. Because we <strong>do</strong> have a <code>JLabel</code> we won't be using the
+<code>getComponent</code> method in <code>DC</code>.
+Instead we do it directly: <code>f.add(l);</code>.
+
+But now let's also add a link about these pigs ;)
+The Animation and Design Library comes with a <code>JLink</code>.
+It can show a link (<i>obvious? ;)</i>). This is the code we will be using:
+<code>DC w = DesignLib.$(new JLink("As seen in Wikipedia", "https://en.wikipedia.org/wiki/Pig"));</code>.
+Then we'll hide and add it using <code>f.add(w.hide().getComponent());</code>.
+
+Yeah you get this now, I will fast forward a bit.
+We make a button too, saying next.
+</p>
+<p>
+Now let's show our frame. All we have to do it <code>f.makeVisible();</code>. BAM!
+</p>
+<p>
+We'll make our first animation now!
+First, hide our first component we added, the <code>JLabel</code>.
+<code>c.hide();</code>. Then let's schedule a fade in!
+Schedule with <code>DesignLib#schedule(int seconds, Runnable task)</code>.<br />
+<b>WARNING: The schedule method takes use of Swing timers and the delay might<br />
+	not be accurate. For example 2 seconds might turn out to be 3. This is the<br />
+	way Java Swing works, and not too much I can do about it. Animations should<br />
+	be more accurate though, they don't run on the Swing thread. But that also means,<br />
+	be careful with how you use it. You might need to use <code>EventQueue.invokeLater</code>.<br />
+	I haven't needed to use that myself too much, though.</b><br />
+Fade in via <code>c.fadeIn();</code>.
+<code>DesignLib.schedule(2, () -> c.fadeIn());</code>
+Good.
+</p>
+<p>
+With <code>DC#animateDone</code> we can wait for a list of animations to be done.
+This is automatically done if you have two animations on <strong>the same</strong> <code>DC</code>.
+Let's do this!
+<code>
+	c.animateDone(() -> w.fadeIn());<br />
+	w.animateDone(() -> next.fadeIn());
+</code>
+</p>
+<p>
+Now let's see what happens if we press the button I spoke of earlier. We have the <code>DC#click</code> method for this.
+<code>next.click(e -> {});</code>. Now let's write anything inside the block!
+</p>
+<p>
+<strong>However!</strong>
+I will let <i>you</i> explore that. The code will be posted below. Let your IDE check methods! Explore the JAR for functions!
+Or even ask in a forum. Or ask me on Skype ;)
+<a href="skype:LEGOlord208?chat">Chat with me on Skype</a>
+</p>
+
+<!-- ======================================================== -->
+<!-- = Java Sourcecode to HTML automatically converted code = -->
+<!-- =   Java2Html Converter 5.0 [2006-02-26] by Markus Gebhard  markus@jave.de   = -->
+<!-- =     Further information: http://www.java2html.de     = -->
+<div align="left" class="java">
+	<table border="0" cellpadding="3" cellspacing="0" bgcolor="#ffffff">
+		<tr>
+			<!-- start source code -->
+			<td nowrap="nowrap" valign="top" align="left">
+				<code class="nocss">
+					<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">java.awt.FlowLayout;</font><br />
+					<font color="#ffffff"></font><br />
+					<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javax.swing.JButton;</font><br />
+					<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">javax.swing.JLabel;</font><br />
+					<font color="#ffffff"></font><br />
+					<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">one.krake.api.design.DC;</font><br />
+					<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">one.krake.api.design.DesignLib;</font><br />
+					<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">one.krake.api.design.alert.Alert;</font><br />
+					<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">one.krake.api.design.elements.JLink;</font><br />
+					<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">one.krake.api.design.frame.Frame;</font><br />
+					<font color="#7f0055"><b>import&nbsp;</b></font><font color="#000000">one.krake.api.design.frame.Frames;</font><br />
+					<font color="#ffffff"></font><br />
+					<font color="#7f0055"><b>public&nbsp;class&nbsp;</b></font><font color="#000000">Test</font><font color="#000000">{</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;</font><font color="#7f0055"><b>public&nbsp;static&nbsp;</b></font><font color="#7f0055"><b>void&nbsp;</b></font><font color="#000000">main</font><font color="#000000">(</font><font color="#000000">String</font><font color="#000000">[]&nbsp;</font><font color="#000000">args</font><font color="#000000">){</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">DesignLib.makeOsLookAndFeel</font><font color="#000000">()</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Frame&nbsp;f&nbsp;=&nbsp;Frames.newFrame</font><font color="#000000">(</font><font color="#2a00ff">&#34;Pigs:&nbsp;The&nbsp;history&nbsp;behind&nbsp;these&nbsp;wild&nbsp;animals&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">f.setLayout</font><font color="#000000">(</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">FlowLayout</font><font color="#000000">())</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">JLabel&nbsp;l&nbsp;=&nbsp;</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JLabel</font><font color="#000000">(</font><font color="#2a00ff">&#34;The&nbsp;story&nbsp;of&nbsp;the&nbsp;world's&nbsp;most&nbsp;dangerous&nbsp;animals&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">DC&nbsp;c&nbsp;=&nbsp;DesignLib.$</font><font color="#000000">(</font><font color="#000000">l</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">c.font</font><font color="#000000">(</font><font color="#990000">20</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">f.add</font><font color="#000000">(</font><font color="#000000">l</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">DC&nbsp;w&nbsp;=&nbsp;DesignLib.$</font><font color="#000000">(</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JLink</font><font color="#000000">(</font><font color="#2a00ff">&#34;As&nbsp;seen&nbsp;in&nbsp;Wikipedia&#34;</font><font color="#000000">,&nbsp;</font><font color="#2a00ff">&#34;https://en.wikipedia.org/wiki/Pig&#34;</font><font color="#000000">))</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">f.add</font><font color="#000000">(</font><font color="#000000">w.hide</font><font color="#000000">()</font><font color="#000000">.getComponent</font><font color="#000000">())</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">DC&nbsp;next&nbsp;=&nbsp;DesignLib.$</font><font color="#000000">(</font><font color="#7f0055"><b>new&nbsp;</b></font><font color="#000000">JButton</font><font color="#000000">(</font><font color="#2a00ff">&#34;Next...&#34;</font><font color="#000000">))</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">f.add</font><font color="#000000">(</font><font color="#000000">next.hide</font><font color="#000000">()</font><font color="#000000">.getComponent</font><font color="#000000">())</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">f.makeVisible</font><font color="#000000">()</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">c.hide</font><font color="#000000">()</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">DesignLib.schedule</font><font color="#000000">(</font><font color="#990000">2</font><font color="#000000">,&nbsp;</font><font color="#000000">()&nbsp;</font><font color="#000000">-&gt;&nbsp;c.fadeIn</font><font color="#000000">())</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">c.animateDone</font><font color="#000000">(()&nbsp;</font><font color="#000000">-&gt;&nbsp;w.fadeIn</font><font color="#000000">())</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">w.animateDone</font><font color="#000000">(()&nbsp;</font><font color="#000000">-&gt;&nbsp;next.fadeIn</font><font color="#000000">())</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">next.click</font><font color="#000000">(</font><font color="#000000">e&nbsp;-&gt;&nbsp;</font><font color="#000000">{</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.progress</font><font color="#000000">(</font><font color="#2a00ff">&#34;Switching&nbsp;page...&#34;</font><font color="#000000">)</font><font color="#000000">.go</font><font color="#000000">(</font><font color="#2a00ff">&#34;Page&nbsp;1/2...&#34;</font><font color="#000000">,&nbsp;</font><font color="#990000">100</font><font color="#000000">)</font><font color="#000000">.animateDone</font><font color="#000000">(</font><font color="#000000">p&nbsp;-&gt;&nbsp;</font><font color="#000000">{</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">p.close</font><font color="#000000">()</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">f.dispose</font><font color="#000000">()</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.defaults</font><font color="#000000">()</font><font color="#000000">.title_say</font><font color="#000000">(</font><font color="#2a00ff">&#34;A&nbsp;friendly&nbsp;warning&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.err</font><font color="#000000">(</font><font color="#2a00ff">&#34;Application&nbsp;crashed.&nbsp;All&nbsp;systems&nbsp;fail.&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.warn</font><font color="#000000">(</font><font color="#2a00ff">&#34;GET&nbsp;OUTTA&nbsp;THE&nbsp;WAY&#34;</font><font color="#000000">,&nbsp;</font><font color="#2a00ff">&#34;You&nbsp;computer&nbsp;is&nbsp;gonna&nbsp;blow.&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.say</font><font color="#000000">(</font><font color="#2a00ff">&#34;Just&nbsp;a&nbsp;friendly&nbsp;warning&nbsp;:D&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>boolean&nbsp;</b></font><font color="#000000">outta&nbsp;=&nbsp;Alert.ask</font><font color="#000000">(</font><font color="#2a00ff">&#34;So...&nbsp;Are&nbsp;you&nbsp;out&nbsp;of&nbsp;the&nbsp;way&nbsp;yet?&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.say</font><font color="#000000">(</font><font color="#000000">outta&nbsp;?&nbsp;</font><font color="#2a00ff">&#34;Liar,&nbsp;since&nbsp;you&nbsp;could&nbsp;pressed&nbsp;OK.&#34;&nbsp;</font><font color="#000000">:&nbsp;</font><font color="#2a00ff">&#34;THEN&nbsp;MOVE&nbsp;IT&nbsp;SON&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.say</font><font color="#000000">(</font><font color="#2a00ff">&#34;Wait,&nbsp;false&nbsp;alarm.&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.say</font><font color="#000000">(</font><font color="#2a00ff">&#34;Are&nbsp;you&nbsp;angry&nbsp;with&nbsp;me?&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>boolean&nbsp;</b></font><font color="#000000">mis&nbsp;=&nbsp;Alert.confirm</font><font color="#000000">(</font><font color="#2a00ff">&#34;You&nbsp;are&nbsp;about&nbsp;to&nbsp;make&nbsp;a&nbsp;very&nbsp;big&nbsp;mistake&nbsp;and&nbsp;say&nbsp;yes.&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>if</b></font><font color="#000000">(</font><font color="#000000">mis</font><font color="#000000">)</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.err</font><font color="#000000">(</font><font color="#2a00ff">&#34;WELL&nbsp;SCR**&nbsp;YOU&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#7f0055"><b>else</b></font><font color="#000000">{</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.say</font><font color="#000000">(</font><font color="#2a00ff">&#34;Thanks&nbsp;for&nbsp;cancelling&nbsp;that&nbsp;:D\nYou&nbsp;are&nbsp;not&nbsp;mine&nbsp;forever!\nWatcha&nbsp;think?&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">String&nbsp;s&nbsp;=&nbsp;Alert.prompt</font><font color="#000000">(</font><font color="#2a00ff">&#34;What&nbsp;do&nbsp;you&nbsp;want&nbsp;to&nbsp;reply?&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.err</font><font color="#000000">(</font><font color="#2a00ff">&#34;MWHAHHAHAHhAHA&nbsp;I&nbsp;AM&nbsp;GONNA&nbsp;TELL&nbsp;THE&nbsp;WHOLE&nbsp;WORLD&nbsp;YOU&nbsp;REPLIED\n-&nbsp;&#34;&nbsp;</font><font color="#000000">+&nbsp;s</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">Alert.say</font><font color="#000000">(</font><font color="#2a00ff">&#34;jk&nbsp;:D&#34;</font><font color="#000000">)</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">})</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;&nbsp;&nbsp;</font><font color="#000000">})</font><font color="#000000">;</font><br />
+					<font color="#ffffff">&nbsp;&nbsp;</font><font color="#000000">}</font><br />
+					<font color="#000000">}</font></code>
+
+			</td>
+			<!-- end source code -->
+		</tr>
+		<!-- start Java2Html link -->
+		<tr>
+			<td align="right">
+				<small>
+					<a href="http://www.java2html.de" target="_blank">Java2html</a>
+				</small>
+			</td>
+		</tr>
+		<!-- end Java2Html link -->
+	</table>
+</div>
+<!-- =       END of automatically generated HTML code       = -->
+<!-- ======================================================== -->
+
+		</div>
+	</body>
+</html>

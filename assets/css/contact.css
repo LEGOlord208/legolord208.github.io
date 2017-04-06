@@ -1,0 +1,18 @@
+#contents img{
+	width: 50%;
+	height: auto;
+	display: block;
+
+	margin-bottom: 25px;
+}
+#contact{
+	float: right;
+	width: 20%;
+}
+
+@media only screen and (max-device-width: 480px){
+	#contact{
+		font-size: 25px;
+	}
+}
+

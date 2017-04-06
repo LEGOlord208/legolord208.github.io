@@ -1,0 +1,38 @@
+---
+layout: default
+---
+
+<p style="background-color: yellow;padding: 10px;">
+	Not all of my programs are here, and some here are unsupported.<br />
+	If you're here looking for something specific and cannot find it,<br />
+	chances are it's on my <a href="https://github.com/LEGOlord208?tab=repositories">GitHub</a>.
+</p>
+
+<p><b>Here are a few programs/games I've created!</b></p>
+{% for app in site.data.software %}
+<div class="entry" data-hash="#{{ app.hash }}" id="download{{ forloop.index0 }}">
+	<div class="title">
+		{{ app.title }}
+		<a href="{{ app.url }}">
+			<i class="material-icons">file_download</i>
+			{% if app.type == "download" %}
+				Download
+			{% elsif app.type == "link" %}
+				Visit
+			{% endif %}
+		</a>
+
+		<i class="material-icons right link">link</i>
+		<span class="right copied">Copied!</span>
+		{% unless app.supported %}
+		<span class="right tooltip">
+			<i class="material-icons" title="Unsupported">warning</i>
+			<span class="tooltiptext">Project unsupported by developer</span>
+		</span>
+		{% endunless %}
+	</div>
+
+	<p class="desc">{{ app.desc }}</p>
+</div>
+{% endfor %}
+<a href="https://sites.google.com/site/legolord208/home/downloads">Older and completely useless poop</a>.<br />

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css" />
+		<link href="/assets/css/tir.css" rel="stylesheet" type="text/css" />
+		<script src="/assets/js/jquery.js"></script>
+		<script src="/assets/js/tir.js"></script>
+	</head>
+	<body>
+		<div id="menu">
+			<div class="menu-item">
+				Home
+			</div>
+			<div class="menu-item" id="about-toggle">
+				About Us
+			</div>
+			<div class="right menu-item">
+				<a href="/">Go to main page</a>
+			</div>
+		</div>
+
+		<div id="wrapper">
+			<div id="info">
+				<div>
+					<h1>TIR</h1>
+					<p>TIR is the game without a name,<br />
+					the ultimate Tic Tac Toe for your desktop.<br />
+					A bot making the same flaws as humans<br />
+					and adapting to your skills.<br />
+					Play with your friends over internet,<br />
+					and avoid port forwarding if you wish!</p>
+					<p>
+					Latest Release: 2,<br />
+					Notes: Multiple fixes and improvements.
+					</p>
+				</div>
+			</div>
+			<div id="sidepanel">
+				<div>
+					<form id="suggest">
+						<h1>Report or Suggest</h1>
+						<select id="suggest-type">
+							<option data-label="a suggestion to">Suggestion</option>
+							<option data-label="found a bug in">Bug</option>
+						</select>
+						<h2>Related:</h2>
+						<select id="suggest-regarding">
+							<option>Application</option>
+							<option>Website</option>
+						</select>
+						<input type="submit" class="blue" />
+					</form>
+				</div>
+				<div>
+					<form id="download-form">
+						<h1>Download</h1>
+						<select>
+							<option data-link="/files/TIR.exe">Windows (x64)</option>
+							<option data-link="/files/TIR32.exe">Windows (x32)</option>
+							<option data-link="/files/TIR.app.zip">Mac OS X</option>
+							<option data-link="/files/TIR32">Linux (x32)</option>
+							<option data-link="/files/TIR">Linux (x64)</option>
+						</select>
+						<input type="submit" class="orange" value="Download"/>
+					</form>
+					<p id="virusWarning32" hidden>
+						Because of the structure of this Jar2Exe file, it may<br />
+						be recognized as virus or adware. <a href="http://bit.ly/2e9lDtt">See scan</a>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div id="about">
+			<div>
+				Created and developed by <a href="/">LEGOlord208</a>.<br />
+				Website and game ideas by <a href="https://twitter.com/FadedMnpn">Mnpn03</a>.<br />
+				Translations by <a href="https://twitter.com/entereloaded">Entereloaded</a> (German) and
+				<a href="https://twitter.com/ELChris414">ELChris414</a> (Greek).<br />
+			</div>
+		</div>
+	</body>
+</html>
