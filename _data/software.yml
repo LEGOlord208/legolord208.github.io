@@ -1,27 +1,27 @@
 - title: AllWritey
   hash: allwritey
-  url: /files/AllWritey.jar
+  url: https://github.com/LEGOlord208/legolord208.github.io/releases/download/any/AllWritey.jar
   type: download
   desc: The text processor All Writey allows you to make documents with ease!
   supported: true
 
 - title: FolderSync
   hash: foldersync
-  url: /files/FolderSync.jar
+  url: https://github.com/LEGOlord208/legolord208.github.io/releases/download/any/FolderSync.jar
   type: download
   desc: Backup your important files quickly! Easy GUI and Real time sync. Force Sync available.
   supported: true
 
 - title: OptiFine Updater
   hash: optifineautoupdater
-  url: /files/OptiFine Updater.jar
+  url: https://github.com/LEGOlord208/legolord208.github.io/releases/download/any/OptiFine Updater.jar
   type: download
   desc: Ever getting tired of updating OptiFine? Because I sure have, so I let my computer do it for me.
   supported: true
 
 - title: Crypter
   hash: crypter
-  url: /files/Crypter.jar
+  url: https://github.com/LEGOlord208/legolord208.github.io/releases/download/any/Crypter.jar
   type: download
   desc: Encode/Encrypt/Hash anything quickly and easily. Full command line support.
   supported: true
@@ -40,31 +40,31 @@
 
 - title: EasyInfo
   hash: easyinfo
-  url: /files/EasyInfo.jar
+  url: https://github.com/LEGOlord208/legolord208.github.io/releases/download/any/EasyInfo.jar
   type: download
   desc: Easy way to store data on screen. BUT... Including data from API calls or websites!
   supported: true
 
 - title: Screen Cover
   hash: screencover
-  url: /files/Screen Cover.jar
+  url: https://github.com/LEGOlord208/legolord208.github.io/releases/download/any/Screen Cover.jar
   type: download
   desc: Silly little program to cover something on your screen. Such as a webcam :P. Hey, you can change color
 
 - title: Pixel Tracker
   hash: pixeltracker
-  url: /files/Pixel Tracker.jar
+  url: https://github.com/LEGOlord208/legolord208.github.io/releases/download/any/Pixel Tracker.jar
   type: download
   desc: 'Silly little program to chase a pixel color on your screen. Can play Google Image Breakout if you select the color #4A7395'
 
 - title: PossessedComputer
   hash: possessedcomputer
-  url: /files/PossessedComputer.jar
+  url: https://github.com/LEGOlord208/legolord208.github.io/releases/download/any/PossessedComputer.jar
   type: download
   desc: Prank a friend with this! Waits a random delay from 30 minutes to 3 hours, then waits for them to become inactive just to write a spooky message on the screen.
 
 - title: itSpams
   hash: itspams
-  url: /files/itSpams.jar
+  url: https://github.com/LEGOlord208/legolord208.github.io/releases/download/any/itSpams.jar
   type: download
   desc: If your friends ever spam you, show them who is boss by spamming them back, and without lifting a finger >:D
