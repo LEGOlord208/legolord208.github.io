@@ -1,14 +1,14 @@
-body{
+body {
 	margin: 0;
 	padding: 0;
 	font-family: 'Roboto', sans-serif;
 	font-size: 20px;
 }
 
-#title{
+#title {
 	vertical-align: middle;
 }
-#icon{
+#icon {
 	border-radius: 50%;
 	width: 64px;
 	height: 64px;
@@ -18,12 +18,12 @@ body{
 	margin: 10px;
 }
 
-#menu, #menuPlaceholder{
+#menu, #menuPlaceholder {
 	height: 48px;
 	width: 100%;
 }
 
-#menu{
+#menu {
 	background: #005CBF;
 
 	position: relative;
@@ -44,34 +44,34 @@ body{
 
 	box-shadow: inset 0 0 5px;
 }
-#menu.fixed{
+#menu.fixed {
 	position: fixed;
 	opacity: 0.5;
 }
-#menu li{
+#menu li {
 	list-style-type: none;
 	vertical-align: middle;
 }
-#menu a{
+#menu a {
 	color: white;
 	text-decoration: none;
 	font-size: xx-large;
 }
-#menu a:hover{
+#menu a:hover {
 	color: orange;
 }
 
-#contents{
+#contents {
 	margin: 0 94px;
 	position: relative;
 }
 
-#title{
+#title {
 	display: inline;
 	margin: 20px;
 }
 
-#imgzoom{
+#imgzoom {
 	width: 0;
 	height: 0;
 	background: black;
@@ -86,7 +86,7 @@ body{
 
 	transition: width 0.5s, height 0.5s;
 }
-#imgzoom img{
+#imgzoom img {
 	width: auto;
 	height: 90%;
 
@@ -96,15 +96,15 @@ body{
 
 	transform: translate(-50%, -50%);
 }
-#imgzoom.visible{
+#imgzoom.visible {
 	width: 90vw;
 	height: 90vh;
 }
-.right{
+.right {
 	float: right;
 }
 
-#cookies{
+#cookies {
 	position: fixed;
 	bottom: -100vh;
 	left: 50%;
@@ -125,17 +125,17 @@ body{
 
 	overflow: auto;
 }
-#cookies.visible{
+#cookies.visible {
 	bottom: 50%;
 	transform: translate(-50%, 50%);
 }
-#cookies button{
+#cookies button {
 	position: absolute;
 	bottom: 10px;
 	right: 10px;
 }
 
-#dim{
+#dim {
 	position: fixed;
 	width: 100vw;
 	height: 100vh;
@@ -149,14 +149,14 @@ body{
 	display: none;
 	z-index: 3;
 }
-#dim.visible{
+#dim.visible {
 	background: rgba(0, 0, 0, 0.7);
 }
 
-.tooltip{
+.tooltip {
 	position: relative;
 }
-.tooltip .tooltiptext{
+.tooltip .tooltiptext {
 	opacity: 0;
 	transition: 0.1s opacity;
 
@@ -172,7 +172,7 @@ body{
 	border-radius: 4px;
 	pointer-events: none;
 }
-.tooltip .tooltiptext::after{
+.tooltip .tooltiptext::after {
 	content: "";
 	border-top: 5px solid transparent;
 	border-bottom: 5px solid transparent;
@@ -183,18 +183,18 @@ body{
 	top: calc(50% - 5px);
 	right: -5px;
 }
-.tooltip:hover .tooltiptext{
+.tooltip:hover .tooltiptext {
 	opacity: 1;
 }
 
-@media only screen and (max-device-width: 480px){
-	#contents{
+@media only screen and (max-device-width: 480px) {
+	#contents {
 		margin: 0 1%;
 	}
-	#menu{
+	#menu {
 		flex-direction: column;
 	}
-	#menu li{
+	#menu li {
 		font-size: 24px;
 		width: 100%;
 
@@ -202,22 +202,22 @@ body{
 
 		transition: opacity 0.2s, width 0.2s, height 0.2s;
 	}
-	#menu a:nth-child(2n){
+	#menu a:nth-child(2n) {
 		background: #00A6DE;
 	}
-	#menu, #menuPlaceholder{
+	#menu, #menuPlaceholder {
 		height: 230px;
 	}
-	#menu.fixed{
+	#menu.fixed {
 		height: 60px;
 		flex-direction: row;
 	}
-	#menu.fixed li:not(.important){
+	#menu.fixed li:not(.important) {
 		opacity: 0;
 		width: 0;
 		height: 0;
 	}
-	#menu.fixed li.important{
+	#menu.fixed li.important {
 		display: inline;
 		background: transparent;
 	}
