@@ -9,8 +9,7 @@
   hash: foldersync
   url: https://github.com/LEGOlord208/legolord208.github.io/releases/download/any/FolderSync.jar
   type: download
-  desc: Backup your important files quickly! Easy GUI and Real time sync. Force Sync available.
-  supported: true
+  desc: 'HAS BEEN REWRITTEN. NEW, AND MUCH BETTER VERSION: https://github.com/LEGOlord208/gofilesync'
 
 - title: OptiFine Updater
   hash: optifineautoupdater
