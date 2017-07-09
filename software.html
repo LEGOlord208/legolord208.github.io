@@ -2,10 +2,28 @@
 layout: default
 ---
 
+<h2>GitHub repositories:</h2>
+<ul>
+{% for repo in site.github.public_repositories %}
+	{% unless repo.fork %}
+		<div class="entry">
+			<div class="title">
+				{{ repo.name }}
+				<a href="{{ repo.html_url }}">
+					<i class="material-icons">file_download</i>
+					Visit
+				</a>
+			</div>
+
+			<p class="desc">{{ repo.description }}</p>
+		</div>
+	{% endunless %}
+{% endfor %}
+</ul>
+
 <p style="background-color: yellow;padding: 10px;">
-	Not all of my programs are here, and some here are unsupported.<br />
-	If you're here looking for something specific and cannot find it,<br />
-	chances are it's on my <a href="https://github.com/LEGOlord208?tab=repositories">GitHub</a>.
+	The following software are old, closed source, useless, and some even unsupported.<br />
+	You may browse through or even download them, but they will most likely be bad quality.
 </p>
 
 <p><b>Here are a few programs/games I've created!</b></p>
@@ -25,10 +43,10 @@ layout: default
 		<i class="material-icons right link">link</i>
 		<span class="right copied">Copied!</span>
 		{% unless app.supported %}
-		<span class="right tooltip">
-			<i class="material-icons" title="Unsupported">warning</i>
-			<span class="tooltiptext">Project unsupported by developer</span>
-		</span>
+			<span class="right tooltip">
+				<i class="material-icons" title="Unsupported">warning</i>
+				<span class="tooltiptext">Project unsupported by developer</span>
+			</span>
 		{% endunless %}
 	</div>
 
