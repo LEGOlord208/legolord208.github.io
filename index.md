@@ -2,26 +2,18 @@
 layout: default
 ---
 
-# Hi!
-I'm LEGOlord208, you know, the one this website is about. That's me. Hello!  
-I like programming and obviously computers.  
-I create software.  
-And I play Minecraft. I like command blocks and modelling in Cubik.  
-I also created a few mods which all sucked.
+Hello World. Nice to meet you. I'm an idiot.  
+My life sucks, and so does my choices throughout my life.  
+If you're really interested to know, then go over to [History](history.html).
 
-I have the diagnosis "Asperger's", so prepare for me to be quite awkward if we talk.<br />
-My real name is Samuel and I have an ugly voice.
+Sorry for bothering you. You're probably looking for my crappy [software](software.html).
 
-If you want to know why my name is "LEGOlord208", check "History"  
-in the handy tab above.
+I hate writing index pages and describing myself. What should I say on them?  
+I have Asperger's syndrome. For me it gets rid of those useless social skills I never use and
+throw them in the ~~trash~~ Recycling Bin (don't wanna be one to let down the environment).  
+My subconscious is also afraid you're better than me. Fuck my subconsciousness. How does it matter who "is better"?  
+I hate myself.
 
-If you are here for some software, press the "Software" tab... Obviously...  
-And if you are a fellow coder and are looking for some neat libraries, press "Libraries" :3
-
-**If you are a coder, I might seem a bit weirder to you if we talk, here is why:**  
-I like you. I really do. But for some reason my mind starts screaming "DANGER, DANGER",  
-and make me all stressed because you are a "competitor", even though I don't even like competitions.  
-This is something I just have to ignore, and please don't feel hurt about it.  
-Once we've been friends for a short time and I learn how often you code, what you can do, et.c  
-I'll definately get more friendly. Hopefully I'm able to hide it so well during my get-to-know period,  
-so you don't notice it. Because I appreciate friends, I really do.
+If you feel like I just threw a bunch of useless information at you at once, you're welcome.
+I mean, isn't it a good thing? Everyone acts like school is a good thing, and that's what they do... So...  
+If not, ask me anything you think I missed. [Contact Me](contact.html).
