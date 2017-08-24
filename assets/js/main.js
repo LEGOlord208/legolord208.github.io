@@ -1,17 +1,17 @@
 $(document).ready(function(){
-	var menu = $("#menu");
-	var top = menu.offset().top;
+	let menu = $("#menu");
+	let top = menu.offset().top;
 
 	$(window).scroll(function(){
 		menu.toggleClass("fixed", $(this).scrollTop() > top);
 	});
 
-	var imgzoom = $("#imgzoom");
+	let imgzoom = $("#imgzoom");
 
 	$("img").click(function(e){
 		e.stopPropagation();
 
-		var imgzoomimg = $("img", imgzoom);
+		let imgzoomimg = $("img", imgzoom);
 		imgzoomimg.prop("src", $(this).prop("src"));
 		imgzoom.addClass("visible");
 	});
@@ -28,19 +28,19 @@ $(document).ready(function(){
 		$("#cookies button").click(function(){
 			$("#cookies, #dim").removeClass("visible");
 
-			var d = new Date();
+			let d = new Date();
 			d.setTime(d.getTime() + 1000 * 60 * 60 * 24 * 365 * 50);
 			document.cookie = "cookies=on; expires=" + d.toUTCString() + "; path=/";
 		});
 	}
 
 	$("#dim").on("transitionend", function(){
-		var me = $(this);
+		let me = $(this);
 
 		if(!me.is(".visible"))
 			me.hide();
 	}).on("visible", function(){
-		var me = $(this);
+		let me = $(this);
 		me.show();
 	});
 	console.log("%c¯\\_(ツ)_/¯", "color: green;font-size: 40px;");

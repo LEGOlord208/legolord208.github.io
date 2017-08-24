@@ -1,7 +1,7 @@
-var hash = location.hash;
+let hash = location.hash;
 
 if(hash){
-	var entries = $(".entry").filter(function(){
+	let entries = $(".entry").filter(function(){
 		return hash.toLowerCase() === $(this).data("hash");
 	});
 
@@ -10,12 +10,12 @@ if(hash){
 }
 
 $(".entry .link").click(function(){
-	var entry = $(this).closest(".entry");
-	var link = location.href.split("#")[0] + entry.data("hash");
+	let entry = $(this).closest(".entry");
+	let link = location.href.split("#")[0] + entry.data("hash");
 
 	entry.attr("data-clipboard-text", link);
 
-	var clip = new Clipboard("#" + entry.attr("id"));
+	let clip = new Clipboard("#" + entry.attr("id"));
 
 	clip.on("success", function(e){
 		entry.find("span.copied").addClass("visible");

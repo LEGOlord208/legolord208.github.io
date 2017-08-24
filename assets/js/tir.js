@@ -1,6 +1,6 @@
 $(window).ready(function(){
 	$("#suggest").submit(function(){
-		var link =
+		let link =
 			"https://twitter.com/intent/tweet?text="
 			+ "@LEGOlord208! I have "
 			+ $("#suggest-type").find(":checked").data("label")
@@ -14,18 +14,18 @@ $(window).ready(function(){
 		location.href = $(this).find("select :checked").data("link");
 		return false;
 	}).find("select").change(function(){
-		var me = $(this);
-		var p = $("#virusWarning32");
+		let me = $(this);
+		let p = $("#virusWarning32");
 		p.toggle(me.find(":checked").text() === "Windows (x32)");
 	});
 	$("#about-toggle").click(function(){
-		var about = $("#about").show();
+		let about = $("#about").show();
 		setTimeout(function(){
 			about.toggleClass("visible");
 		}, 100);
 	});
 	$("#about").on("transitionend", function(){
-		var me = $(this);
+		let me = $(this);
 		if(!me.is(".visible"))
 			$(this).hide();
 	});
