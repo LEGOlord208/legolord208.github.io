@@ -3,7 +3,6 @@ layout: default
 ---
 
 <h2>GitHub repositories:</h2>
-<ul>
 {% for repo in site.github.public_repositories %}
 	{% unless repo.fork %}
 		<div class="entry">
@@ -20,7 +19,6 @@ layout: default
 		</div>
 	{% endunless %}
 {% endfor %}
-</ul>
 
 <p style="background-color: black;padding: 10px;">
 	The following software are old, closed source, useless, and even unsupported.<br />
