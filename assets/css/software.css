@@ -1,59 +1,37 @@
-.entry{
+.entry {
 	border: 2px solid black;
-	margin-bottom: 10px;
-	margin-left: 40px;
+	margin: 10px;
+    width: 256px;
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
-.entry .title{
+.entry .title {
 	border-bottom: 2px solid black;
-	font-size: xx-large;
-
+    padding-bottom: 10px;
 	margin: 20px;
+    overflow: inherit;
 }
-.entry a, span{
+.entry .title span {
+    word-break: break-all;
+    white-space: nowrap;
+
+	font-size: xx-large;
+}
+.entry a, span {
 	font-size: medium;
 	vertical-align: middle;
 }
-.entry a{
+.entry a {
 	text-decoration: none;
-	color: blue;
+	color: orange;
 }
-.entry p{
-	margin-left: 20px;
+.entry p {
+	margin: 20px;
+    overflow: inherit;
+    text-overflow: inherit;
 }
-.entry .link{
-	cursor: pointer;
-}
-
-.entry.linked{
-	animation: 3s linked;
-}
-@keyframes linked{
-	from{
-		border-color: yellow;
-		background: yellow;
-	}
-	to{
-		border-color: black;
-		background: white;
-	}
-}
-
-.copied{
-	display: none;
-	margin-right: 3px;
-}
-.copied.visible{
-	position: relative;
-	display: inline;
-	animation: 0.5s copied forwards;
-}
-@keyframes copied{
-	from{
-		opacity: 1;
-		bottom: 0;
-	}
-	to{
-		opacity: 0;
-		bottom: 10px;
-	}
+i.material-icons {
+    font-size: 12px;
 }

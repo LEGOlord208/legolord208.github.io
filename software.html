@@ -8,11 +8,12 @@ layout: default
 	{% unless repo.fork %}
 		<div class="entry">
 			<div class="title">
-				{{ repo.name }}
-				<a href="{{ repo.html_url }}">
-					<i class="material-icons">file_download</i>
-					Visit
-				</a>
+                <span>{{ repo.name }}</span>
+                <br />
+                <a href="{{ repo.html_url }}">
+                    <i class="material-icons">file_download</i>
+                    Visit
+                </a>
 			</div>
 
 			<p class="desc">{{ repo.description }}</p>
@@ -21,8 +22,8 @@ layout: default
 {% endfor %}
 </ul>
 
-<p style="background-color: yellow;padding: 10px;">
-	The following software are old, closed source, useless, and some even unsupported.<br />
+<p style="background-color: black;padding: 10px;">
+	The following software are old, closed source, useless, and even unsupported.<br />
 	You may browse through or even download them, but they will most likely be bad quality.
 </p>
 
@@ -30,7 +31,8 @@ layout: default
 {% for app in site.data.software %}
 <div class="entry" data-hash="#{{ app.hash }}" id="download{{ forloop.index0 }}">
 	<div class="title">
-		{{ app.title }}
+        <span>{{ app.title }}</span>
+        <br />
 		<a href="{{ app.url }}">
 			<i class="material-icons">file_download</i>
 			{% if app.type == "download" %}
@@ -39,19 +41,10 @@ layout: default
 				Visit
 			{% endif %}
 		</a>
-
-		<i class="material-icons right link">link</i>
-		<span class="right copied">Copied!</span>
-		{% unless app.supported %}
-			<span class="right tooltip">
-				<i class="material-icons" title="Unsupported">warning</i>
-				<span class="tooltiptext">Project unsupported by developer</span>
-			</span>
-		{% endunless %}
 	</div>
 
 	<p class="desc">{{ app.desc }}</p>
 </div>
 {% endfor %}
+<br />
 <a href="https://sites.google.com/site/jD91mZM2/home/downloads">Older and completely useless poop</a>.<br />
-<script src="/assets/js/software.js"></script>

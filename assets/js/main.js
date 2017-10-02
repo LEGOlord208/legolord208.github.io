@@ -1,9 +1,10 @@
 $(document).ready(function(){
+    let win = $(window);
 	let menu = $("#menu");
-	let top = menu.offset().top;
+	let bottom = $(document).height() - 100;
 
-	$(window).scroll(function(){
-		menu.toggleClass("fixed", $(this).scrollTop() > top);
+	win.scroll(function(){
+		menu.toggleClass("hide", win.scrollTop() + win.height() > bottom);
 	});
 
 	let imgzoom = $("#imgzoom");

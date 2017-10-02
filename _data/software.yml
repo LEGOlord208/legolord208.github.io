@@ -3,27 +3,18 @@
   url: https://github.com/LEGOlord208/legolord208.github.io/releases/download/any/AllWritey.jar
   type: download
   desc: The text processor All Writey allows you to make documents with ease!
-  supported: true
-
-- title: FolderSync
-  hash: foldersync
-  url: https://github.com/LEGOlord208/legolord208.github.io/releases/download/any/FolderSync.jar
-  type: download
-  desc: 'HAS BEEN REWRITTEN. NEW, AND MUCH BETTER VERSION: https://github.com/LEGOlord208/gofilesync'
 
 - title: OptiFine Updater
   hash: optifineautoupdater
   url: https://github.com/LEGOlord208/legolord208.github.io/releases/download/any/OptiFine Updater.jar
   type: download
   desc: Ever getting tired of updating OptiFine? Because I sure have, so I let my computer do it for me.
-  supported: true
 
 - title: Crypter
   hash: crypter
   url: https://github.com/LEGOlord208/legolord208.github.io/releases/download/any/Crypter.jar
   type: download
   desc: Encode/Encrypt/Hash anything quickly and easily. Full command line support.
-  supported: true
 
 - title: MCMini
   hash: mcmini
@@ -42,7 +33,6 @@
   url: https://github.com/LEGOlord208/legolord208.github.io/releases/download/any/EasyInfo.jar
   type: download
   desc: Easy way to store data on screen. BUT... Including data from API calls or websites!
-  supported: true
 
 - title: Screen Cover
   hash: screencover
