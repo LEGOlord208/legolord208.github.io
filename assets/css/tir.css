@@ -1,232 +1,232 @@
 body {
-	background: #6CBF69;
-	background: radial-gradient(#6CBF69, #5F995D) no-repeat center center fixed / cover;
+    background: #6CBF69;
+    background: radial-gradient(#6CBF69, #5F995D) no-repeat center center fixed / cover;
 
-	height: 100vh;
-	padding: 0;
-	margin: 0;
+    height: 100vh;
+    padding: 0;
+    margin: 0;
 
-	overflow-x: hidden;
+    overflow-x: hidden;
 
-	font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
 }
 #menu {
-	background: white;
-	height: 50px;
-	line-height: 50px;
-	padding: 0 1%;
+    background: white;
+    height: 50px;
+    line-height: 50px;
+    padding: 0 1%;
 
-	vertical-align: middle;
+    vertical-align: middle;
 
-	overflow: hidden;
+    overflow: hidden;
 }
 #menu a {
-	text-decoration: none;
-	color: black;
+    text-decoration: none;
+    color: black;
 }
 #menu .menu-item {
-	display: inline-block;
-	height: 100%;
-	border-bottom: 5px solid #17B3E3;
+    display: inline-block;
+    height: 100%;
+    border-bottom: 5px solid #17B3E3;
 
-	transition: 0.1s height;
+    transition: 0.1s height;
 
-	margin: 0 1%;
+    margin: 0 1%;
 
-	cursor: pointer;
+    cursor: pointer;
 }
 #menu .menu-item:hover {
-	height: calc(100% - 5px);
+    height: calc(100% - 5px);
 }
 
 #wrapper {
-	position: absolute;
-	top: 40%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 
 
-	white-space: nowrap;
+    white-space: nowrap;
 
-	height: 400px;
+    height: 400px;
 }
 @keyframes fade {
-	from {
-		opacity: 0;
-	}
-	to {
-		opacity: 1;
-	}
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }
 #info {
-	box-shadow: 0 0 10px black;
+    box-shadow: 0 0 10px black;
 
-	width: 400px;
-	height: 100%;
+    width: 400px;
+    height: 100%;
 
-	padding: 10px;
-	box-sizing: border-box;
+    padding: 10px;
+    box-sizing: border-box;
 
-	float: left;
+    float: left;
 
-	color: white;
+    color: white;
 
-	font-size: 1.1em;
+    font-size: 1.1em;
 }
 #info > div {
-	opacity: 0;
-	animation: fade 1s forwards;
+    opacity: 0;
+    animation: fade 1s forwards;
 }
 #info p:nth-of-type(2) {
-	color: red;
-	font-size: small;
+    color: red;
+    font-size: small;
 
-	position: absolute;
-	bottom: 0;
+    position: absolute;
+    bottom: 0;
 }
 #sidepanel {
-	width: 300px;
-	height: 100%;
+    width: 300px;
+    height: 100%;
 
-	margin-left: 10px;
+    margin-left: 10px;
 
-	display: inline-block;
+    display: inline-block;
 
-	position: relative;
+    position: relative;
 }
 #sidepanel > div {
-	background: white;
-	background: linear-gradient(white, #E8E8E8);
+    background: white;
+    background: linear-gradient(white, #E8E8E8);
 
 
-	height: 48.5%;
-	position: relative;
-	border: 1px solid black;
-	box-sizing: border-box;
+    height: 48.5%;
+    position: relative;
+    border: 1px solid black;
+    box-sizing: border-box;
 
-	padding: 10px;
+    padding: 10px;
 
-	border-radius: 3px;
+    border-radius: 3px;
 
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 
-	padding: 5%;
+    padding: 5%;
 }
 #sidepanel div:first-child {
-	margin-bottom: 5%;
+    margin-bottom: 5%;
 }
 #sidepanel div:nth-child(2) p {
-	color: red;
-	font-size: x-small;
+    color: red;
+    font-size: x-small;
 }
 #suggest input[type=submit] {
-	position: absolute;
-	top: 40%;
-	left: 50%;
+    position: absolute;
+    top: 40%;
+    left: 50%;
 }
 #suggest h1,h2 {
-	margin: 1%;
+    margin: 1%;
 }
 
 .right {
-	float: right;
+    float: right;
 }
 input[type=submit], button {
-	border: 1px solid black;
-	border-radius: 5%;
-	font-size: 15px;
-	font-weight: bold;
+    border: 1px solid black;
+    border-radius: 5%;
+    font-size: 15px;
+    font-weight: bold;
 
-	padding: 10px;
-	cursor: pointer;
+    padding: 10px;
+    cursor: pointer;
 }
 input[type=submit]:hover, button:hover {
-	opacity: 0.9;
+    opacity: 0.9;
 }
 .blue {
-	background: #00BFFF;
-	background: linear-gradient(#00BFFF, #009DD1);
+    background: #00BFFF;
+    background: linear-gradient(#00BFFF, #009DD1);
 
-	color: white;
+    color: white;
 }
 .orange {
-	background: #FF9D00;
-	background: linear-gradient(#FF9D00, #D98600);
+    background: #FF9D00;
+    background: linear-gradient(#FF9D00, #D98600);
 }
 #about {
-	position: fixed;
-	left: 50%;
-	bottom: 10px;
+    position: fixed;
+    left: 50%;
+    bottom: 10px;
 
-	transform: translateX(-50%);
+    transform: translateX(-50%);
 
-	width: 70%;
-	height: 100px;
-	font-size: 15px;
+    width: 70%;
+    height: 100px;
+    font-size: 15px;
 
-	text-align: center;
-	border: 2px solid brown;
-	background: white;
+    text-align: center;
+    border: 2px solid brown;
+    background: white;
 
-	box-shadow: 0 0 10px;
+    box-shadow: 0 0 10px;
 
-	opacity: 0;
+    opacity: 0;
 
-	transition: opacity 1s;
+    transition: opacity 1s;
 
-	display: none;
+    display: none;
 }
 #about.visible {
-	opacity: 1;
+    opacity: 1;
 }
 #about div {
-	position: absolute;
-	top: 50%;
-	left: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
 
-	transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 @media only screen and (max-device-width: 480px) {
-	#wrapper {
-		position: relative;
-		top: 0;
-		left: 0;
+    #wrapper {
+        position: relative;
+        top: 0;
+        left: 0;
 
-		transform: none;
+        transform: none;
 
-		white-space: normal;
-	}
-	#info {
-		position: relative;
-		top: 0;
-		left: 0;
+        white-space: normal;
+    }
+    #info {
+        position: relative;
+        top: 0;
+        left: 0;
 
-		width: 100%;
-	}
-	#sidepanel {
-		width: 100%;
-		margin: 0;
-	}
-	#sidepanel div {
-		position: relative;
-		top: 0;
-		left: 0;
+        width: 100%;
+    }
+    #sidepanel {
+        width: 100%;
+        margin: 0;
+    }
+    #sidepanel div {
+        position: relative;
+        top: 0;
+        left: 0;
 
-		width: 100%;
-	}
-	#sidepanel div:first-child {
-		margin: 0;
-	}
-	#sidepanel div:nth-child(2)::after {
-		position: absolute;
-		bottom: 1px;
+        width: 100%;
+    }
+    #sidepanel div:first-child {
+        margin: 0;
+    }
+    #sidepanel div:nth-child(2)::after {
+        position: absolute;
+        bottom: 1px;
 
-		content: "No Mobile version available as of right now.";
-		color: red;
-	}
-	#about {
-		font-size: 10px;
-	}
+        content: "No Mobile version available as of right now.";
+        color: red;
+    }
+    #about {
+        font-size: 10px;
+    }
 }

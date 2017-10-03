@@ -1,13 +1,13 @@
 #twitter{
-	width: 30%;
-	height: 70vh;
+    width: 30%;
+    height: 70vh;
 
-	position: absolute;
-	right: 20px;
+    position: absolute;
+    right: 20px;
 }
 
 @media screen and (max-device-width: 480px){
-	#twitter{
-		display: none;
-	}
+    #twitter{
+        display: none;
+    }
 }

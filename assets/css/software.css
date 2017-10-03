@@ -1,5 +1,5 @@
 .entry {
-	border: 2px solid black;
+    border: 2px solid black;
     height: 160px;
     overflow: hidden;
     position: absolute;
@@ -11,7 +11,7 @@
     opacity: .8;
 }
 .entry-wrapper {
-	margin: 10px;
+    margin: 10px;
     display: inline-block;
     height: 160px;
     width: 256px;
@@ -28,24 +28,24 @@
     word-break: initial;
 }
 .entry .title {
-	border-bottom: 2px solid black;
-	margin: 20px;
+    border-bottom: 2px solid black;
+    margin: 20px;
     overflow: inherit;
     padding-bottom: 10px;
 }
 .entry .title span {
-	font-size: xx-large;
+    font-size: xx-large;
 }
 .entry a, span {
-	font-size: medium;
-	vertical-align: middle;
+    font-size: medium;
+    vertical-align: middle;
 }
 .entry a {
-	text-decoration: none;
-	color: orange;
+    text-decoration: none;
+    color: orange;
 }
 .entry p {
-	margin: 20px;
+    margin: 20px;
     overflow: inherit;
     text-overflow: ellipsis;
 }

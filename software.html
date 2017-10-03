@@ -4,8 +4,8 @@ layout: default
 
 <h2>GitHub repositories:</h2>
 {% for repo in site.github.public_repositories %}
-	{% unless repo.fork %}
-		<div class="entry-wrapper">
+    {% unless repo.fork %}
+        <div class="entry-wrapper">
             <div class="entry">
                 <div class="title">
                     <span>{{ repo.name }}</span>
@@ -19,12 +19,12 @@ layout: default
                 <p class="desc">{{ repo.description }}</p>
             </div>
         </div>
-	{% endunless %}
+    {% endunless %}
 {% endfor %}
 
 <p style="background-color: black;padding: 10px;">
-	The following software are old, closed source, useless, and even unsupported.<br />
-	You may browse through or even download them, but they will most likely be bad quality.
+    The following software are old, closed source, useless, and even unsupported.<br />
+    You may browse through or even download them, but they will most likely be bad quality.
 </p>
 
 <p><b>Here are a few programs/games I've created!</b></p>
