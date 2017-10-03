@@ -5,18 +5,20 @@ layout: default
 <h2>GitHub repositories:</h2>
 {% for repo in site.github.public_repositories %}
 	{% unless repo.fork %}
-		<div class="entry">
-			<div class="title">
-                <span>{{ repo.name }}</span>
-                <br />
-                <a href="{{ repo.html_url }}">
-                    <i class="material-icons">file_download</i>
-                    Visit
-                </a>
-			</div>
+		<div class="entry-wrapper">
+            <div class="entry">
+                <div class="title">
+                    <span>{{ repo.name }}</span>
+                    <br />
+                    <a href="{{ repo.html_url }}">
+                        <i class="material-icons">file_download</i>
+                        Visit
+                    </a>
+                </div>
 
-			<p class="desc">{{ repo.description }}</p>
-		</div>
+                <p class="desc">{{ repo.description }}</p>
+            </div>
+        </div>
 	{% endunless %}
 {% endfor %}
 
@@ -27,22 +29,24 @@ layout: default
 
 <p><b>Here are a few programs/games I've created!</b></p>
 {% for app in site.data.software %}
-<div class="entry" data-hash="#{{ app.hash }}" id="download{{ forloop.index0 }}">
-	<div class="title">
-        <span>{{ app.title }}</span>
-        <br />
-		<a href="{{ app.url }}">
-			<i class="material-icons">file_download</i>
-			{% if app.type == "download" %}
-				Download
-			{% elsif app.type == "link" %}
-				Visit
-			{% endif %}
-		</a>
-	</div>
+    <div class="entry-wrapper">
+        <div class="entry">
+            <div class="title">
+                <span>{{ app.title }}</span>
+                <br />
+                <a href="{{ app.url }}">
+                    <i class="material-icons">file_download</i>
+                    {% if app.type == "download" %}
+                        Download
+                    {% elsif app.type == "link" %}
+                        Visit
+                    {% endif %}
+                </a>
+            </div>
 
-	<p class="desc">{{ app.desc }}</p>
-</div>
+            <p class="desc">{{ app.desc }}</p>
+        </div>
+    </div>
 {% endfor %}
 <br />
 <a href="https://sites.google.com/site/LEGOlord208/home/downloads">Older and completely useless poop</a>.<br />

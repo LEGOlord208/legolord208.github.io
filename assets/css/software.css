@@ -1,22 +1,39 @@
 .entry {
 	border: 2px solid black;
-	margin: 10px;
-    width: 256px;
-    display: inline-block;
-    vertical-align: top;
+    height: 160px;
     overflow: hidden;
-    text-overflow: ellipsis;
+    position: absolute;
+    transition: .3s all;
+    vertical-align: top;
+    white-space: nowrap;
+    width: 256px;
+    word-break: break-all;
+    opacity: .8;
+}
+.entry-wrapper {
+	margin: 10px;
+    display: inline-block;
+    height: 160px;
+    width: 256px;
+}
+.entry-wrapper:hover > .entry {
+    width: 384px;
+    height: 192px;
+    z-index: 1;
+    opacity: 1;
+    box-shadow: 0 0 50px black;
+}
+.entry-wrapper:hover > .entry p {
+    white-space: initial;
+    word-break: initial;
 }
 .entry .title {
 	border-bottom: 2px solid black;
-    padding-bottom: 10px;
 	margin: 20px;
     overflow: inherit;
+    padding-bottom: 10px;
 }
 .entry .title span {
-    word-break: break-all;
-    white-space: nowrap;
-
 	font-size: xx-large;
 }
 .entry a, span {
@@ -30,7 +47,7 @@
 .entry p {
 	margin: 20px;
     overflow: inherit;
-    text-overflow: inherit;
+    text-overflow: ellipsis;
 }
 i.material-icons {
     font-size: 12px;

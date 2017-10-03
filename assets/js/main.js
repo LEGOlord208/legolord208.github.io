@@ -1,10 +1,9 @@
 $(document).ready(function(){
     let win = $(window);
 	let menu = $("#menu");
-	let bottom = $(document).height() - 100;
 
 	win.scroll(function(){
-		menu.toggleClass("hide", win.scrollTop() + win.height() > bottom);
+		menu.toggleClass("hide", win.scrollTop() + win.height() > $(document).height() - 100);
 	});
 
 	let imgzoom = $("#imgzoom");
