@@ -24,6 +24,7 @@ baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://jD91mZM2.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jD91mZM2
 github_username:  jD91mZM2
+repository: jD91mZM2/jD91mZM2.github.io
 
 # Build settings
 markdown: kramdown
