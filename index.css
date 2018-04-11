@@ -1,0 +1,20 @@
+body {
+    background: #080808;
+    margin: 10px;
+}
+#controls {
+    display: flex;
+}
+#controls div {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+#termplay {
+    background: #161616;
+    border-radius: 10px 0 0 10px;
+}
+#insult {
+    border-radius: 0 10px 10px 0;
+    background: #ff6100;
+}

@@ -1,0 +1,14 @@
+[package]
+authors = ["jD91mZM2 <me@krake.one>"]
+name = "insult"
+version = "0.1.0"
+
+[dependencies]
+rand = "0.4.2"
+
+[dependencies.insult]
+path = "/home/jD91mZM2/Coding/Rust/insult"
+version = "2.0.0"
+
+[lib]
+crate-type = ["cdylib"]
