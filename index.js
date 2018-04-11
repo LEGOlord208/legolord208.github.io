@@ -15,7 +15,11 @@ window.onload = function() {
     let terminal = document.getElementById("terminal");
     let xterm = new Terminal();
     xterm.open(terminal);
-    xterm.write("Do something with the above controls!\r\n\n" + shellPrompt);
+    xterm.write("Welcome to the jD91mZM2 software hub.\r\n");
+    xterm.write("The purpose of this is to have a few online demos of my software.\r\n");
+    xterm.write("This is because I have nothing better to do on my website anyway.\r\n");
+    xterm.write("WebAssembly is pretty cool <3\r\n");
+    xterm.write("\n" + shellPrompt);
 
     fetch("termplay-wasm/target/wasm32-unknown-unknown/release/termplay.wasm")
         .then(r => r.arrayBuffer())
