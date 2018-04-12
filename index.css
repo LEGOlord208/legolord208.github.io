@@ -4,33 +4,34 @@ body {
 }
 #controls {
     display: flex;
+    line-height: 50px;
+    margin-bottom: 10px;
 }
-#controls * {
-    transition: 1s opacity;
+#controls div {
+    width: 100%;
+    transition: 1s opacity, 1s width;
+    height: 50px;
+    padding: 0 10px;
 }
-#controls.disabled * {
+#controls.disabled div {
     opacity: 0;
+    width: 75%;
     pointer-events: none;
 }
 #controls::after {
     content: "Press Ctrl+C to exit process";
-    transition: 1s width;
-    display: block;
     width: 0;
+    opacity: 0;
+    transition: 1s width, 1s opacity;
     white-space: nowrap;
     overflow: hidden;
+    text-align: center;
+    border-radius: 10px;
+    background: #d84615;
 }
 #controls.disabled::after {
-    background: #d84615;
-    border-radius: 10px;
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-}
-#controls div {
-    padding: 10px;
-    margin-bottom: 10px;
-    width: 100%;
+    opacity: 1;
 }
 #termplay {
     background: #161616;
