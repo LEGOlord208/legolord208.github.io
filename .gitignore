@@ -15,18 +15,18 @@ insult-wasm/target/*
 insult-wasm/target/wasm32-unknown-unknown/*
 !insult-wasm/target/wasm32-unknown-unknown/release/
 insult-wasm/target/wasm32-unknown-unknown/release/*
-!insult-wasm/target/wasm32-unknown-unknown/release/insult-wasm.wasm
+!insult-wasm/target/wasm32-unknown-unknown/release/insult_wasm.wasm
 
 termplay-wasm/target/*
 !termplay-wasm/target/wasm32-unknown-unknown/
 termplay-wasm/target/wasm32-unknown-unknown/*
 !termplay-wasm/target/wasm32-unknown-unknown/release/
 termplay-wasm/target/wasm32-unknown-unknown/release/*
-!termplay-wasm/target/wasm32-unknown-unknown/release/termplay-wasm.wasm
+!termplay-wasm/target/wasm32-unknown-unknown/release/termplay_wasm.wasm
 
 crappy-chess-minimax-wasm/target/*
 !crappy-chess-minimax-wasm/target/wasm32-unknown-unknown/
 crappy-chess-minimax-wasm/target/wasm32-unknown-unknown/*
 !crappy-chess-minimax-wasm/target/wasm32-unknown-unknown/release/
 crappy-chess-minimax-wasm/target/wasm32-unknown-unknown/release/*
-!crappy-chess-minimax-wasm/target/wasm32-unknown-unknown/release/crappy-chess-minimax-wasm.wasm
+!crappy-chess-minimax-wasm/target/wasm32-unknown-unknown/release/crappy_chess_minimax_wasm.wasm
