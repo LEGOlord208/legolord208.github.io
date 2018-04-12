@@ -5,6 +5,28 @@ body {
 #controls {
     display: flex;
 }
+#controls * {
+    transition: 1s opacity;
+}
+#controls.disabled * {
+    opacity: 0;
+    pointer-events: none;
+}
+#controls::after {
+    content: "Press Ctrl+C to exit process";
+    transition: 1s width;
+    display: block;
+    width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+}
+#controls.disabled::after {
+    background: #d84615;
+    border-radius: 10px;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
 #controls div {
     padding: 10px;
     margin-bottom: 10px;
@@ -15,6 +37,9 @@ body {
     border-radius: 10px 0 0 10px;
 }
 #insult {
-    border-radius: 0 10px 10px 0;
     background: #ff6100;
+}
+#chess {
+    background: #135e00;
+    border-radius: 0 10px 10px 0;
 }
