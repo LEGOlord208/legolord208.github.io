@@ -1,8 +1,22 @@
+const defaultCode = `HAI 1.2
+
+HOW IZ I FAC YR N
+    BOTH SAEM N AN 0, O RLY?
+        YA RLY, FOUND YR 1
+        NO WAI, FOUND YR PRODUKT OF N AN I IZ FAC YR DIFF OF N AN 1 MKAY
+    OIC
+IF U SAY SO
+
+VISIBLE "5! = " I IZ FAC YR 5 MKAY
+
+KTHXBYE`;
+
 window.onload = function() {
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/terminal");
-
-    editor.setValue(localStorage.getItem("code") || "");
+    editor.session.setMode("ace/mode/lolcode")
+    editor.setValue(localStorage.getItem("code") || defaultCode);
+    editor.focus();
 
     window.onbeforeunload = function() {
         localStorage.setItem("code", editor.getValue());
@@ -18,14 +32,10 @@ window.onload = function() {
             let exports = lolcode.instance.exports;
 
             document.getElementById("run").onclick = function() {
-                console.log("converting");
                 let code = newCStringUtf16(exports, editor.getValue());
-                console.log("executing");
                 let result = readCStringUtf16(exports, exports.eval(code));
-                console.log("freeing");
                 exports.free(code);
 
-                console.log("result: ", result);
                 output.innerText = result;
             };
         });
