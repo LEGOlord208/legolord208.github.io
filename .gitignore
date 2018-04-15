@@ -7,6 +7,12 @@ node_modules/xterm/*
 node_modules/xterm/dist/*
 !node_modules/xterm/dist/xterm.css
 !node_modules/xterm/dist/xterm.js
+!node_modules/ace-builds/
+node_modules/ace-builds/*
+!node_modules/ace-builds/src-min/
+node_modules/ace-builds/src-min/*
+!node_modules/ace-builds/src-min/ace.js
+!node_modules/ace-builds/src-min/theme-terminal.js
 
 Cargo.lock
 
@@ -36,4 +42,4 @@ lolcode-wasm/target/*
 lolcode-wasm/target/wasm32-unknown-unknown/*
 !lolcode-wasm/target/wasm32-unknown-unknown/release/
 lolcode-wasm/target/wasm32-unknown-unknown/release/*
-!lolcode-wasm/target/wasm32-unknown-unknown/release/crappy_chess_minimax_wasm.wasm
+!lolcode-wasm/target/wasm32-unknown-unknown/release/lolcode_wasm.wasm
