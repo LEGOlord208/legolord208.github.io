@@ -10,13 +10,13 @@ function readCStringRaw(array) {
 function readCString(exports, offset) {
     let buffer = new Uint8Array(exports.memory.buffer, offset);
     let string = readCStringRaw(buffer);
-    exports.free(offset);
+    exports.free_utf8(offset);
     return string;
 }
 function readCStringUtf16(exports, offset) {
     let buffer = new Uint16Array(exports.memory.buffer, offset);
     let string = readCStringRaw(buffer);
-    exports.free(offset);
+    exports.free_utf16(offset);
     return string;
 }
 
@@ -29,8 +29,11 @@ function newCStringUtf16(exports, string) {
     return rawString;
 }
 
-function loadWasm(wasm, obj) {
-    return fetch(wasm)
+function loadWasm() {
+    return fetch("wasm/target/wasm32-unknown-unknown/release/wasm.wasm")
             .then(r => r.arrayBuffer())
-            .then(r => WebAssembly.instantiate(r, obj));
+            .then(r => WebAssembly.instantiate(r, { env: {
+                rand: Math.random,
+                fmod: function(x, y) { x % y }
+            }}));
 }

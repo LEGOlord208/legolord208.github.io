@@ -24,19 +24,17 @@ window.onload = function() {
 
     let output = document.getElementById("output");
 
-    loadWasm(
-        "lolcode-wasm/target/wasm32-unknown-unknown/release/lolcode_wasm.wasm",
-        { env: { fmod: function(x, y) { x % y } } }
-    )
-        .then(lolcode => {
-            let exports = lolcode.instance.exports;
+    output.innerText = "Loading Web Assembly...";
+    loadWasm().then(wasm => {
+        let exports = wasm.instance.exports;
+        output.innerText = "";
 
-            document.getElementById("run").onclick = function() {
-                let code = newCStringUtf16(exports, editor.getValue());
-                let result = readCStringUtf16(exports, exports.eval(code));
-                exports.free(code);
+        document.getElementById("run").onclick = function() {
+            let code = newCStringUtf16(exports, editor.getValue());
+            let result = readCStringUtf16(exports, exports.eval(code));
+            exports.free_utf16(code);
 
-                output.innerText = result;
-            };
-        });
+            output.innerText = result;
+        };
+    });
 };

@@ -1,6 +1,20 @@
+extern crate image;
+extern crate insult;
 extern crate lci;
+extern crate rand;
+extern crate termplay;
+extern crate crappy_chess_minimax;
 
-use std::{borrow::Cow, io, slice};
+pub mod wasm_crappy_chess_minimax;
+pub mod wasm_insult;
+pub mod wasm_lci;
+pub mod wasm_termplay;
+
+use std::{
+    ffi::CString,
+    os::raw::c_char,
+    slice
+};
 
 #[no_mangle]
 pub extern fn string_new(len: usize) -> *mut u16 {
@@ -10,6 +24,17 @@ pub extern fn string_new(len: usize) -> *mut u16 {
 pub unsafe extern fn string_set(string: *mut u16, len: usize, index: usize, val: u16) {
     let slice = slice::from_raw_parts_mut(string, len+1);
     slice[index] = val;
+}
+
+#[no_mangle]
+pub unsafe extern fn free_utf8(string: *mut c_char) {
+    CString::from_raw(string);
+}
+#[no_mangle]
+pub unsafe extern fn free_utf16(string: *mut u16) {
+    let len = strlen(string);
+    let slice = slice::from_raw_parts_mut(string, len+1);
+    Box::from_raw(slice);
 }
 
 unsafe fn strlen(string: *mut u16) -> usize {
@@ -24,27 +49,9 @@ unsafe fn from_utf16(string: *mut u16) -> String {
     let slice = slice::from_raw_parts(string, len);
     String::from_utf16(slice).unwrap()
 }
-unsafe fn to_utf16(string: &str) -> *mut u16 {
+fn to_utf16(string: &str) -> *mut u16 {
     let mut output: Vec<u16> = string.encode_utf16().collect();
     assert!(!output.contains(&0));
     output.push(0);
     Box::into_raw(output.into_boxed_slice()) as *mut u16
-}
-
-#[no_mangle]
-pub extern fn eval(code: *mut u16) -> *mut u16 {
-    let code = unsafe { from_utf16(code) };
-    let mut writer = Vec::new();
-    let string = match lci::eval(&code, io::empty(), &mut writer) {
-        Ok(()) => Cow::Borrowed(std::str::from_utf8(&writer).unwrap()),
-        Err(err) => Cow::Owned(err.to_string())
-    };
-    unsafe { to_utf16(&string) }
-}
-
-#[no_mangle]
-pub unsafe extern fn free(string: *mut u16) {
-    let len = strlen(string);
-    let slice = slice::from_raw_parts_mut(string, len+1);
-    Box::from_raw(slice);
 }

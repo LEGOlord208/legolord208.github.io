@@ -10,7 +10,7 @@ window.onload = function() {
     xterm.write("The purpose of this is to have a few online demos of my software.\r\n");
     xterm.write("This is because I have nothing better to do on my website anyway.\r\n");
     xterm.write("WebAssembly is pretty cool <3\r\n");
-    xterm.write("\n" + shellPrompt);
+    xterm.write("Loading...\r\n");
 
     let line = "";
     let lineHandler = null;
@@ -41,89 +41,76 @@ window.onload = function() {
         }
     };
 
-    loadWasm("termplay-wasm/target/wasm32-unknown-unknown/release/termplay_wasm.wasm")
-        .then(termplay => {
-            let exports = termplay.instance.exports;
+    loadWasm().then(wasm => {
+        let exports = wasm.instance.exports;
 
-            let fileTarget = document.getElementById("termplay").firstElementChild;
-            fileTarget.onchange = function(e) {
-                let reader = new FileReader();
-                reader.onload = function(file) {
-                    xterm.write("termplay \"" + e.target.files[0].name + "\"\r\n");
+        xterm.write("\n" + shellPrompt);
 
-                    let data = new Uint8Array(file.target.result);
-                    let len = data.length;
+        document.getElementById("termplay").firstElementChild.onchange = function(e) {
+            let reader = new FileReader();
+            reader.onload = function(file) {
+                xterm.write("termplay \"" + e.target.files[0].name + "\"\r\n");
 
-                    let slice = exports.slice_new(len);
-                    for (let i = 0; i < len; ++i) {
-                        exports.slice_set(slice, len, i, data[i]);
-                    }
+                let data = new Uint8Array(file.target.result);
+                let len = data.length;
 
-                    let offset = exports.image_to_string(slice, len);
-                    let string = readCString(exports, offset);
+                let slice = exports.slice_new(len);
+                for (let i = 0; i < len; ++i) {
+                    exports.slice_set(slice, len, i, data[i]);
+                }
 
-                    xterm.write(string + "\r\n");
-                    xterm.write(shellPrompt);
-                };
-                reader.readAsArrayBuffer(e.target.files[0]);
-            };
-        });
-
-    loadWasm(
-        "insult-wasm/target/wasm32-unknown-unknown/release/insult_wasm.wasm",
-        { env: { rand: Math.random } }
-    )
-        .then(insult => {
-            let exports = insult.instance.exports;
-
-            let button = document.getElementById("insult").firstElementChild;
-            button.onclick = function() {
-                xterm.write("insult\r\n");
-
-                let string = readCString(exports, exports.insult());
+                let offset = exports.image_to_string(slice, len);
+                exports.slice_free(slice, len);
+                let string = readCString(exports, offset);
 
                 xterm.write(string + "\r\n");
                 xterm.write(shellPrompt);
             };
-        });
+            reader.readAsArrayBuffer(e.target.files[0]);
+        };
 
-    let p = null;
+        document.getElementById("insult").firstElementChild.onclick = function() {
+            xterm.write("insult\r\n");
 
-    loadWasm("crappy-chess-minimax-wasm/target/wasm32-unknown-unknown/release/crappy_chess_minimax_wasm.wasm")
-        .then(chess => {
-            let exports = chess.instance.exports;
+            let string = readCStringUtf16(exports, exports.insult());
 
-            let button = document.getElementById("chess").firstElementChild;
-            button.onclick = function() {
-                xterm.write("crappy-chess-minimax\r\n");
+            xterm.write(string + "\r\n");
+            xterm.write(shellPrompt);
+        };
 
-                if (p == null) {
-                    p = exports.prompt_new();
+        var p = null;
+
+        document.getElementById("chess").firstElementChild.onclick = function() {
+            xterm.write("crappy-chess-minimax\r\n");
+
+            if (p == null) {
+                p = exports.prompt_new();
+            }
+
+            function prompt_print() {
+                let string = readCStringUtf16(exports, exports.prompt_print(p));
+                xterm.write(string);
+            }
+
+            prompt_print();
+
+            controls.classList.add("disabled");
+            lineHandler = function(line) {
+                if (line == null) {
+                    lineHandler = null;
+                    exports.prompt_free(p);
+                    p = null;
+                } else {
+                    let input = newCStringUtf16(exports, input);
+
+                    let offset = exports.prompt_input(p, input);
+                    exports.free_utf16(input);
+                    let string = readCStringUtf16(exports, offset);
+
+                    xterm.write(string + "\r\n");
+                    prompt_print();
                 }
-
-                function prompt_print() {
-                    let string = readCStringUtf16(exports, exports.prompt_print(p));
-                    xterm.write(string);
-                }
-
-                prompt_print();
-
-                controls.classList.add("disabled");
-                lineHandler = function(line) {
-                    if (line == null) {
-                        lineHandler = null;
-                        exports.prompt_free(p);
-                        p = null;
-                    } else {
-                        let input = newCStringUtf16(exports, input);
-
-                        let offset = exports.prompt_input(p, input); // this frees `input`
-                        let string = readCStringUtf16(exports, offset);
-
-                        xterm.write(string + "\r\n");
-                        prompt_print();
-                    }
-                };
             };
-        });
+        };
+    });
 };
