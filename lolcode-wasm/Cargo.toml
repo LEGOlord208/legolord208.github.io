@@ -1,0 +1,10 @@
+[package]
+name = "lolcode-wasm"
+version = "0.1.0"
+authors = ["jD91mZM2 <me@krake.one>"]
+
+[dependencies.lci]
+git = "https://github.com/jD91mZM2/rust-lci"
+
+[lib]
+crate-type = ["cdylib"]

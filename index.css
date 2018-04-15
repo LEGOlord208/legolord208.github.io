@@ -1,6 +1,10 @@
 body {
     background: #080808;
     margin: 10px;
+    color: white;
+}
+a {
+    color: blue;
 }
 #controls {
     display: flex;

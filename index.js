@@ -1,21 +1,3 @@
-function readCStringRaw(array) {
-    let string = "";
-    let cursor = 0;
-    while (array[cursor] != 0) {
-        string += String.fromCharCode(array[cursor]);
-        cursor += 1;
-    }
-    return string.replace(/\n/g, "\r\n"); // https://github.com/xtermjs/xterm.js/issues/145
-}
-function readCString(memBuffer, offset) {
-    let buffer = new Uint8Array(memBuffer, offset);
-    return readCStringRaw(buffer);
-}
-function readCStringUtf16(memBuffer, offset) {
-    let buffer = new Uint16Array(memBuffer, offset);
-    return readCStringRaw(buffer);
-}
-
 window.onload = function() {
     let shellPrompt = "totally-not-fake-bash$ ";
 
@@ -59,10 +41,10 @@ window.onload = function() {
         }
     };
 
-    fetch("termplay-wasm/target/wasm32-unknown-unknown/release/termplay_wasm.wasm")
-        .then(r => r.arrayBuffer())
-        .then(r => WebAssembly.instantiate(r))
+    loadWasm("termplay-wasm/target/wasm32-unknown-unknown/release/termplay_wasm.wasm")
         .then(termplay => {
+            let exports = termplay.instance.exports;
+
             let fileTarget = document.getElementById("termplay").firstElementChild;
             fileTarget.onchange = function(e) {
                 let reader = new FileReader();
@@ -72,16 +54,13 @@ window.onload = function() {
                     let data = new Uint8Array(file.target.result);
                     let len = data.length;
 
-                    let exports = termplay.instance.exports;
-
                     let slice = exports.slice_new(len);
                     for (let i = 0; i < len; ++i) {
                         exports.slice_set(slice, len, i, data[i]);
                     }
 
                     let offset = exports.image_to_string(slice, len);
-                    let string = readCString(exports.memory.buffer, offset);
-                    exports.free(offset);
+                    let string = readCString(exports, offset);
 
                     xterm.write(string + "\r\n");
                     xterm.write(shellPrompt);
@@ -90,19 +69,18 @@ window.onload = function() {
             };
         });
 
-    fetch("insult-wasm/target/wasm32-unknown-unknown/release/insult_wasm.wasm")
-        .then(r => r.arrayBuffer())
-        .then(r => WebAssembly.instantiate(r, { env: { rand: function() { return Math.random(); } } }))
+    loadWasm(
+        "insult-wasm/target/wasm32-unknown-unknown/release/insult_wasm.wasm",
+        { env: { rand: Math.random } }
+    )
         .then(insult => {
+            let exports = insult.instance.exports;
+
             let button = document.getElementById("insult").firstElementChild;
             button.onclick = function() {
                 xterm.write("insult\r\n");
 
-                let exports = insult.instance.exports;
-
-                let offset = exports.insult();
-                let string = readCString(exports.memory.buffer, offset);
-                exports.free(offset);
+                let string = readCString(exports, exports.insult());
 
                 xterm.write(string + "\r\n");
                 xterm.write(shellPrompt);
@@ -111,25 +89,20 @@ window.onload = function() {
 
     let p = null;
 
-    fetch("crappy-chess-minimax-wasm/target/wasm32-unknown-unknown/release/crappy_chess_minimax_wasm.wasm")
-        .then(r => r.arrayBuffer())
-        .then(r => WebAssembly.instantiate(r, { env: { rand: function() { return Math.random(); } } }))
+    loadWasm("crappy-chess-minimax-wasm/target/wasm32-unknown-unknown/release/crappy_chess_minimax_wasm.wasm")
         .then(chess => {
+            let exports = chess.instance.exports;
+
             let button = document.getElementById("chess").firstElementChild;
             button.onclick = function() {
                 xterm.write("crappy-chess-minimax\r\n");
-
-                let exports = chess.instance.exports;
 
                 if (p == null) {
                     p = exports.prompt_new();
                 }
 
                 function prompt_print() {
-                    let offset = exports.prompt_print(p);
-                    let string = readCStringUtf16(exports.memory.buffer, offset);
-                    exports.free(offset);
-
+                    let string = readCStringUtf16(exports, exports.prompt_print(p));
                     xterm.write(string);
                 }
 
@@ -142,15 +115,10 @@ window.onload = function() {
                         exports.prompt_free(p);
                         p = null;
                     } else {
-                        let input = exports.string_new(line.length);
-
-                        for (i in line) {
-                            exports.string_set(input, line.length, i, line.charCodeAt(i))
-                        }
+                        let input = newCStringUtf16(exports, input);
 
                         let offset = exports.prompt_input(p, input); // this frees `input`
-                        let string = readCStringUtf16(exports.memory.buffer, offset);
-                        exports.free(offset);
+                        let string = readCStringUtf16(exports, offset);
 
                         xterm.write(string + "\r\n");
                         prompt_print();

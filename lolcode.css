@@ -1,0 +1,28 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+header {
+    height: 32px;
+    line-height: 32px;
+    background: gray;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+#editor {
+    width: 50vw;
+    height: calc(100vh - 32px);
+    box-sizing: border-box;
+    float: left;
+    border-right: 1px solid white;
+}
+#output {
+    color: white;
+    background: black;
+    width: 50vw;
+    height: calc(100vh - 32px);
+    box-sizing: border-box;
+    float: right;
+    border-left: 1px solid white;
+}

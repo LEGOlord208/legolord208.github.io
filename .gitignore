@@ -30,3 +30,10 @@ crappy-chess-minimax-wasm/target/wasm32-unknown-unknown/*
 !crappy-chess-minimax-wasm/target/wasm32-unknown-unknown/release/
 crappy-chess-minimax-wasm/target/wasm32-unknown-unknown/release/*
 !crappy-chess-minimax-wasm/target/wasm32-unknown-unknown/release/crappy_chess_minimax_wasm.wasm
+
+lolcode-wasm/target/*
+!lolcode-wasm/target/wasm32-unknown-unknown/
+lolcode-wasm/target/wasm32-unknown-unknown/*
+!lolcode-wasm/target/wasm32-unknown-unknown/release/
+lolcode-wasm/target/wasm32-unknown-unknown/release/*
+!lolcode-wasm/target/wasm32-unknown-unknown/release/crappy_chess_minimax_wasm.wasm
