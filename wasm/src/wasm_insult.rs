@@ -3,17 +3,20 @@ use insult::WordsFile;
 use rand::Rng;
 
 extern {
-    fn rand() -> f64;
+    fn rand() -> f32;
 }
 
 pub struct WasmRand;
 
 impl Rng for WasmRand {
     fn next_u32(&mut self) -> u32 {
-        self.next_u64() as u32
+        unsafe { rand() }.to_bits()
     }
     fn next_u64(&mut self) -> u64 {
-        unsafe { rand() }.to_bits()
+        let mut result = self.next_u32() as u64;
+        result <<= 32;
+        result += self.next_u32() as u64;
+        result
     }
 }
 
