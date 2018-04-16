@@ -3,14 +3,15 @@ use insult::WordsFile;
 use rand::Rng;
 
 extern {
-    fn rand() -> f32;
+    fn rand() -> f64;
 }
 
 pub struct WasmRand;
 
 impl Rng for WasmRand {
     fn next_u32(&mut self) -> u32 {
-        unsafe { rand() }.to_bits()
+        // Apparently Chrome gives a float with 32-bits of randomness
+        (unsafe { rand() } * std::u32::MAX as f64) as u32
     }
     fn next_u64(&mut self) -> u64 {
         let mut result = self.next_u32() as u64;
