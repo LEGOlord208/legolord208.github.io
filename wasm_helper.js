@@ -34,6 +34,6 @@ function loadWasm() {
             .then(r => r.arrayBuffer())
             .then(r => WebAssembly.instantiate(r, { env: {
                 rand: Math.random,
-                fmod: function(x, y) { x % y }
+                fmod: function(x, y) { return x % y; }
             }}));
 }
