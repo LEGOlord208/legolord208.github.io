@@ -101,7 +101,7 @@ window.onload = function() {
                     exports.prompt_free(p);
                     p = null;
                 } else {
-                    let input = newCStringUtf16(exports, input);
+                    let input = newCStringUtf16(exports, line);
 
                     let offset = exports.prompt_input(p, input);
                     exports.free_utf16(input);
