@@ -35,18 +35,19 @@ pub extern fn eval(code: *mut u16) -> *mut u16 {
     let reader = BufReader::new(reader);
 
     let string = match lci::capture(&code, reader, |eval| {
-        eval.bind_func("ALERTIN", Box::new(|values| {
+        //eval.set_recursion_limit(32);
+        eval.bind_func("ALERTIN", None, |values| {
             unsafe {
                 alert(to_utf16(&join(values)));
             }
             Value::Noob
-        }));
-        eval.bind_func("LOGGIN", Box::new(|values| {
+        });
+        eval.bind_func("LOGGIN", None, |values| {
             unsafe {
                 log(to_utf16(&join(values)));
             }
             Value::Noob
-        }));
+        });
     }) {
         Ok(output) => output,
         Err(err) => err.to_string()
