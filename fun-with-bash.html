@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Fact you might not have known</title>
+        <style>
+            body {
+                background: black;
+                color: white;
+                margin: 0;
+            }
+            #header {
+                text-align: center;
+            }
+            #disclaimer {
+                bottom: 0;
+                font-size: 10px;
+                position: absolute;
+                text-align: center;
+                width: 100%;
+            }
+            div {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+            code {
+                background: lightgray;
+                border-radius: 5px;
+                color: black;
+                display: block;
+                padding: 7px;
+                width: 100%;
+            }
+        </style>
+        <script>
+            window.onload = function() {
+                document.getElementsByTagName("code")[0].addEventListener("copy", function(e) {
+                    e.clipboardData.setData("text/plain", "echo Watch out!\necho This could have been bad!\n");
+                    e.preventDefault();
+                });
+            };
+        </script>
+    </head>
+    <body>
+        <p id="header">Hello! Did you know pasting clipboard contents in <b>Bash</b> could be dangerous?</p>
+        <div>
+            <p>Check it out! Copy paste this into bash:</p>
+            <code>echo yee</code>
+        </div>
+        <p id="disclaimer">Disclaimer: I don't give a shit about browser compatibility. This might not work for you.</p>
+    </body>
+</html>

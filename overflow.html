@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Integer overflow</title>
+        <style>
+            table, tr, th, td {
+                border-collapse: collapse;
+                border: 1px solid black;
+                font-weight: normal;
+                padding: 5px;
+                text-align: left;
+            }
+            .view:not(#view4) {
+                display: none;
+            }
+        </style>
+        <script src="assets/js/big.min.js"></script>
+    </head>
+    <body>
+<pre><code>
+Min int equation - Signed: -1 &lt;&lt; bits-1      Unsigned: 0
+Max int equation - Signed: (1 &lt;&lt; bits-1) - 1 Unsigned: (1 &lt;&lt; bits) - 1
+</code></pre>
+
+            <select id="view-toggle">
+                <option value="view1">Document</option>
+                <option value="view2">ASCII table</option>
+                <option value="view3">Unicode table</option>
+                <option value="view4" selected>HTML table</option>
+                <option value="">Hide</option>
+            </select>
+
+            <div id="view1" class="view">
+<pre><code>
++- Pre-calculated ---------------------------------------------+
+| C: "signed char"/"int8_t" Java: "byte" Rust: "i8"            |
+|   Min: -128                                                  |
+|   Max:  127                                                  |
+| C: "signed short int"/"int16_t" Java: "short" Rust: "i16"    |
+|   Min: -32768                                                |
+|   Max:  32767                                                |
+| C: "signed long int"/"int32_t" Java: "int" Rust: "i32"       |
+|   Min: -2147483648                                           |
+|   Max:  2147483647                                           |
+| C: "signed long long int"/"int64_t" Java: "long" Rust: "i64" |
+|   Min: -9223372036854775808                                  |
+|   Max:  9223372036854775807                                  |
+| C: "int128_t" Rust: "i128"                                   |
+|   Min: -170141183460469231731687303715884105728              |
+|   Max:  170141183460469231731687303715884105727              |
+|                                                              |
+| C: "unsigned char"/"uint8_t" Rust: "u8"                      |
+|   Min: 0                                                     |
+|   Max: 255                                                   |
+| C: "unsigned short int"/"uint16_t" Rust: "u16"               |
+|   Min: 0                                                     |
+|   Max: 65535                                                 |
+| C: "unsigned long int"/"uint32_t" Rust: "u32"                |
+|   Min: 0                                                     |
+|   Max: 4294967295                                            |
+| C: "unsigned long long int"/"uint64_t" Rust: "u64"           |
+|   Min: 0                                                     |
+|   Max: 18446744073709551615                                  |
+| C: "uint128_t" Rust: "u128"                                  |
+|   Min: 0                                                     |
+|   Max: 340282366920938463463374607431768211455               |
++--------------------------------------------------------------+
+</code></pre>
+            </div>
+            <div id="view2" class="view">
+<pre><code>
++------------------------+---------------+-------+------+------------------------------------------+------------------------------------------+
+| C                      | C Alternative | Java  | Rust | Min                                      | Max                                      |
++------------------------+---------------+-------+------+------------------------------------------+------------------------------------------+
+| signed char            | int8_t        | byte  | i8   | -128                                     | 127                                      |
+| signed short int       | int16_t       | short | i16  | -32768                                   | 32767                                    |
+| signed long int        | int32_t       | int   | i32  | -2147483648                              | 2147483647                               |
+| signed long long int   | int64_t       | long  | i64  | -9223372036854775808                     | 9223372036854775807                      |
+| -                      | int128_t      | -     | i128 | -170141183460469231731687303715884105728 | 170141183460469231731687303715884105727  |
+| unsigned char          | uint8_t       | -     | u8   | 0                                        | 255                                      |
+| unsigned short int     | uint16_t      | -     | u16  | 0                                        | 65535                                    |
+| unsigned long int      | uint32_t      | -     | u32  | 0                                        | 4294967295                               |
+| unsigned long long int | uint64_t      | -     | u64  | 0                                        | 18446744073709551615                     |
+| -                      | uint128_t     | -     | u128 | 0                                        | 340282366920938463463374607431768211455  |
++------------------------+---------------+-------+------+------------------------------------------+------------------------------------------+
+</code></pre>
+            </div>
+            <div id="view3" class="view">
+<pre><code>
+┌────────────────────────┬───────────────┬───────┬──────┬──────────────────────────────────────────┬──────────────────────────────────────────┐
+│ C                      │ C Alternative │ Java  │ Rust │ Min                                      │ Max                                      │
+├────────────────────────┼───────────────┼───────┼──────┼──────────────────────────────────────────┼──────────────────────────────────────────┤
+│ signed char            │ int8_t        │ byte  │ i8   │ ─128                                     │ 127                                      │
+│ signed short int       │ int16_t       │ short │ i16  │ ─32768                                   │ 32767                                    │
+│ signed long int        │ int32_t       │ int   │ i32  │ ─2147483648                              │ 2147483647                               │
+│ signed long long int   │ int64_t       │ long  │ i64  │ ─9223372036854775808                     │ 9223372036854775807                      │
+│ -                      │ int128_t      │ -     │ i128 │ ─170141183460469231731687303715884105728 │ 170141183460469231731687303715884105727  │
+│ unsigned char          │ uint8_t       │ -     │ u8   │ 0                                        │ 255                                      │
+│ unsigned short int     │ uint16_t      │ -     │ u16  │ 0                                        │ 65535                                    │
+│ unsigned long int      │ uint32_t      │ -     │ u32  │ 0                                        │ 4294967295                               │
+│ unsigned long long int │ uint64_t      │ -     │ u64  │ 0                                        │ 18446744073709551615                     │
+│ -                      │ uint128_t     │ -     │ u128 │ 0                                        │ 340282366920938463463374607431768211455  │
+└────────────────────────┴───────────────┴───────┴──────┴──────────────────────────────────────────┴──────────────────────────────────────────┘
+</code></pre>
+            </div>
+        </code>
+        </pre>
+        <div id="view4" class="view">
+            <br />
+            <table>
+                <tr>
+                    <th>C</th>
+                    <th>C Alternative</th>
+                    <th>Java</th>
+                    <th>Rust</th>
+                    <th>Min</th>
+                    <th>Max</th>
+                </tr>
+                <tr>
+                    <th>signed char</th>
+                    <th>int8_t</th>
+                    <th>byte</th>
+                    <th>i8</th>
+                    <th id="i8-min">-128</th>
+                    <th id="i8-max">127</th>
+                </tr>
+                <tr>
+                    <th>signed short int</th>
+                    <th>int16_t</th>
+                    <th>short</th>
+                    <th>i16</th>
+                    <th id="i16-min">-32768</th>
+                    <th id="i16-max">32767</th>
+                </tr>
+                <tr>
+                    <th>signed long int</th>
+                    <th>int32_t</th>
+                    <th>int</th>
+                    <th>i32</th>
+                    <th id="i32-min">-2147483648</th>
+                    <th id="i32-max">2147483647</th>
+                </tr>
+                <tr>
+                    <th>signed long long int</th>
+                    <th>int64_t</th>
+                    <th>long</th>
+                    <th>i64</th>
+                    <th id="i64-min">-9223372036854775808</th>
+                    <th id="i64-max">9223372036854775807</th>
+                </tr>
+                <tr>
+                    <th>-</th>
+                    <th>int128_t</th>
+                    <th>-</th>
+                    <th>i128</th>
+                    <th id="i128-min">-170141183460469231731687303715884105728</th>
+                    <th id="i128-max">170141183460469231731687303715884105727</th>
+                </tr>
+                <tr>
+                    <th>unsigned char</th>
+                    <th>uint8_t</th>
+                    <th>-</th>
+                    <th>u8</th>
+                    <th id="u8-min">0</th>
+                    <th id="u8-max">255</th>
+                </tr>
+                <tr>
+                    <th>unsigned short int</th>
+                    <th>uint16_t</th>
+                    <th>-</th>
+                    <th>u16</th>
+                    <th id="u16-min">0</th>
+                    <th id="u16-max">65535</th>
+                </tr>
+                <tr>
+                    <th>unsigned long int</th>
+                    <th>uint32_t</th>
+                    <th>-</th>
+                    <th>u32</th>
+                    <th id="u32-min">0</th>
+                    <th id="u32-max">4294967295</th>
+                </tr>
+                <tr>
+                    <th>unsigned long long int</th>
+                    <th>uint64_t</th>
+                    <th>-</th>
+                    <th>u64</th>
+                    <th id="u64-min">0</th>
+                    <th id="u64-max">18446744073709551615</th>
+                </tr>
+                <tr>
+                    <th>-</th>
+                    <th>uint128_t</th>
+                    <th>-</th>
+                    <th>u128</th>
+                    <th id="u128-min">0</th>
+                    <th id="u128-max">340282366920938463463374607431768211455</th>
+                </tr>
+            </table>
+        </div>
+        <div style="margin-top: 20px;">
+            <select id="wrap-type">
+                <option value="i8">Integer 8-bit</option>
+                <option value="i16">Integer 16-bit</option>
+                <option value="i32">Integer 32-bit</option>
+                <option value="i64">Integer 64-bit</option>
+                <option value="i128">Integer 128-bit</option>
+                <option value="u8">Unsigned Integer 8-bit</option>
+                <option value="u16">Unsigned Integer 16-bit</option>
+                <option value="u32">Unsigned Integer 32-bit</option>
+                <option value="u64">Unsigned Integer 64-bit</option>
+                <option value="u128">Unsigned Integer 128-bit</option>
+            </select>
+            <input type="number" id="wrap-input" placeholder="Wrap number"/>
+            <output id="wrap-output" for="wrap-input" placeholder="Output"/>
+        </div>
+        <script>
+            let view_toggle = document.getElementById("view-toggle");
+            view_toggle.addEventListener("change", function() {
+                let elems = document.getElementsByClassName("view");
+                for (let elem of elems) {
+                    elem.style.display = "none";
+                }
+
+                if (view_toggle.value != "") {
+                    document.getElementById(view_toggle.value).style.display = "block";
+                }
+            });
+            let wrap_type = document.getElementById("wrap-type");
+            let wrap_input = document.getElementById("wrap-input");
+            let wrap_output = document.getElementById("wrap-output");
+            wrap_input.addEventListener("input", function() {
+                if (wrap_input.value == "") {
+                    wrap_output.value = 0;
+                    return;
+                }
+                let min = document.getElementById(wrap_type.value + "-min").innerText;
+                let max = document.getElementById(wrap_type.value + "-max").innerText;
+                let num = Big(wrap_input.value);
+
+                let bits = Big(max).minus(min).plus(1);
+                while (num.gt(max)) {
+                    num = num.minus(bits);
+                }
+                while (num.lt(min)) {
+                    num = num.plus(bits);
+                }
+                wrap_output.value = num;
+            });
+        </script>
+    </body>
+</html>
