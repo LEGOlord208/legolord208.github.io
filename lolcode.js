@@ -7,7 +7,15 @@ HOW IZ I FAC YR N
     OIC
 IF U SAY SO
 
-VISIBLE "5! = " I IZ FAC YR 5 MKAY
+OBTW
+    ALERTIN is a function defined by this specific implementation
+    that opens a JavaScript alert dialog.
+    Also see LOGGIN, which does the same thing but with logs.
+TLDR
+
+I IZ ALERTIN YR "Input a number to factorial. Please, keep it small." MKAY
+GIMMEH N
+VISIBLE N "! = " I IZ FAC YR N MKAY
 
 KTHXBYE`;
 

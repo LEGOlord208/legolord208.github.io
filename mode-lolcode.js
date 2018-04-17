@@ -40,11 +40,11 @@ var LOLCODEHighlightRules = function() {
             {
                 token: "comment.line",
                 regex: "\\bBTW\\b[^\\n]*",
-                next: "comment"
             },
             {
                 token: "comment.block",
-                regex: "\\bOBTW\\b[\\s\\S]*?TLDR\\b"
+                regex: "\\bOBTW\\b",
+                next: "comment"
             },
             {
                 token: "support.function",
@@ -67,11 +67,10 @@ var LOLCODEHighlightRules = function() {
             },
             {
                 token: "comment.block",
-                regex: ".*"
+                regex: "."
             }
         ]
     };
-    
 }
 
 oop.inherits(LOLCODEHighlightRules, TextHighlightRules);
