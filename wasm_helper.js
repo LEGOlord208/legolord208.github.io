@@ -30,10 +30,20 @@ function newCStringUtf16(exports, string) {
 }
 
 function loadWasm() {
+    let exports = null;
     return fetch("wasm/target/wasm32-unknown-unknown/release/wasm.wasm")
             .then(r => r.arrayBuffer())
             .then(r => WebAssembly.instantiate(r, { env: {
                 rand: Math.random,
-                fmod: function(x, y) { return x % y; }
-            }}));
+                fmod: function(x, y) { return x % y; },
+                alert: function(string) { alert(readCStringUtf16(exports, string)); },
+                log: function(string) { console.log(readCStringUtf16(exports, string)); },
+                prompt: function(string) {
+                    return newCStringUtf16(exports, prompt()); // caller frees this
+                },
+            }}))
+            .then(wasm => {
+                exports = wasm.instance.exports;
+                return Promise.resolve(wasm);
+            });
 }

@@ -2,10 +2,6 @@ use ::*;
 use insult::WordsFile;
 use rand::Rng;
 
-extern {
-    fn rand() -> f64;
-}
-
 pub struct WasmRand;
 
 impl Rng for WasmRand {

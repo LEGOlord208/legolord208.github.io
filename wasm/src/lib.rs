@@ -16,6 +16,13 @@ use std::{
     slice
 };
 
+extern {
+    fn alert(string: *mut u16);
+    fn log(string: *mut u16);
+    fn prompt() -> *mut u16;
+    fn rand() -> f64;
+}
+
 #[no_mangle]
 pub extern fn string_new(len: usize) -> *mut u16 {
     Box::into_raw(vec![0; len+1].into_boxed_slice()) as *mut u16
