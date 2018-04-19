@@ -112,5 +112,7 @@ window.onload = function() {
                 }
             };
         };
+    }).catch(err => {
+        xterm.write(wasmError.replace(/\n/g, "\r\n"));
     });
 };

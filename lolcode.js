@@ -44,5 +44,7 @@ window.onload = function() {
 
             output.innerText = result;
         };
+    }).catch(err => {
+        output.innerText = wasmError.replace(/\n/g, "\r\n");
     });
 };

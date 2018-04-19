@@ -1,3 +1,12 @@
+const wasmError = `Failed to fetch Web Assembly file.
+Is there a network error?
+Is an extension preventing access to this file?
+
+Known issue:
+Adblock with easylist is blocking WASM files.
+https://github.com/easylist/easylist/issues/1034
+`;
+
 function readCStringRaw(array) {
     let string = "";
     let cursor = 0;
