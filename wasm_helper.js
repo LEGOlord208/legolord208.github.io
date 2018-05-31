@@ -42,15 +42,29 @@ function loadWasm() {
     let exports = null;
     return fetch("wasm/target/wasm32-unknown-unknown/release/wasm.wasm")
             .then(r => r.arrayBuffer())
-            .then(r => WebAssembly.instantiate(r, { env: {
-                rand: Math.random,
-                fmod: function(x, y) { return x % y; },
-                alert: function(string) { alert(readCStringUtf16(exports, string)); },
-                log: function(string) { console.log(readCStringUtf16(exports, string)); },
-                prompt: function(string) {
-                    return newCStringUtf16(exports, prompt()); // caller frees this
-                },
-            }}))
+            .then(r => {
+                let obj = { env: {
+                    rand: Math.random,
+                    alert: function(string) { alert(readCStringUtf16(exports, string)); },
+                    log: function(string) { console.log(readCStringUtf16(exports, string)); },
+                    prompt: function(string) {
+                        return newCStringUtf16(exports, prompt()); // caller frees this
+                    },
+
+                    fmod: (x, y) => x % y,
+                    exp2f: (x, y) => Math.exp(x, 2),
+                }};
+                // https://stackoverflow.com/a/47998925/5069285
+                // https://stackoverflow.com/a/47999160/5069285
+                // https://github.com/rust-lang/rust/issues/51238
+                for (let name of Object.getOwnPropertyNames(Math)) {
+                    if (typeof Math[name] == "function") {
+                        obj.env[name] = Math[name];
+                        obj.env[name + "f"] = Math[name];
+                    }
+                }
+                return WebAssembly.instantiate(r, obj);
+            })
             .then(wasm => {
                 exports = wasm.instance.exports;
                 return Promise.resolve(wasm);

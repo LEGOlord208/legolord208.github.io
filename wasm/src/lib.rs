@@ -1,7 +1,7 @@
 extern crate image;
 extern crate insult;
 extern crate lci;
-extern crate rand;
+extern crate rand_core;
 extern crate termplay;
 extern crate crappy_chess_minimax;
 

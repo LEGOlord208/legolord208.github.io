@@ -2,18 +2,19 @@
 authors = ["jD91mZM2 <me@krake.one>"]
 name = "wasm"
 version = "0.1.0"
+
 [dependencies]
-image = "0.18.0"
-insult = "2.0.1"
-lci = "0.1.6"
-rand = "0.4.2"
+image = "0.19.0"
+insult = "2.0.2"
+lci = "0.1.7"
+rand_core = "0.2.0"
 
 [dependencies.crappy-chess-minimax]
 git = "https://github.com/jD91mZM2/crappy-chess-minimax"
 
 [dependencies.termplay]
 default-features = false
-version = "2.0.2"
+version = "2.0.5"
 
 [lib]
 crate-type = ["cdylib"]
