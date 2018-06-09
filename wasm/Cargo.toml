@@ -5,9 +5,9 @@ version = "0.1.0"
 
 [dependencies]
 image = "0.19.0"
-insult = "2.0.2"
-lci = "0.1.7"
-rand_core = "0.2.0"
+insult = "2.0.3"
+lci = "0.1.8"
+rand_core = "0.2.1"
 
 [dependencies.crappy-chess-minimax]
 git = "https://github.com/jD91mZM2/crappy-chess-minimax"

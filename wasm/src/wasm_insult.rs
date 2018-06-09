@@ -1,5 +1,4 @@
 use ::*;
-use insult::WordsFile;
 use rand_core::{impls, Error as RngError, RngCore};
 
 pub struct WasmRand;
@@ -17,27 +16,9 @@ impl RngCore for WasmRand {
     }
 }
 
-pub fn parse(content: &str) -> Vec<(bool, String)> {
-    content.lines()
-        .map(|line| {
-            let mut split = line.splitn(2, ',');
-            let flag = match split.next().unwrap().trim() {
-                "false" => false,
-                "true" => true,
-                _ => panic!("invalid file")
-            };
-            (flag, split.next().unwrap().trim().to_string())
-        })
-        .collect()
-}
-
 #[no_mangle]
 pub extern fn insult() -> *mut u16 {
-    let wordsfile = WordsFile {
-        nouns: parse(include_str!("insult/nouns")),
-        endings: parse(include_str!("insult/endings")),
-        verbs: parse(include_str!("insult/verbs"))
-    };
+    let wordsfile = insult::open_default();
     let string = wordsfile.generate(WasmRand).to_string();
 
     to_utf16(&*string)
