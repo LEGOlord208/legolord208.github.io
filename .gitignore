@@ -7,10 +7,4 @@ _site
 package-lock.json
 
 Cargo.lock
-
-wasm/target/*
-!wasm/target/wasm32-unknown-unknown/
-wasm/target/wasm32-unknown-unknown/*
-!wasm/target/wasm32-unknown-unknown/release/
-wasm/target/wasm32-unknown-unknown/release/*
-!wasm/target/wasm32-unknown-unknown/release/wasm.wasm
+wasm/target

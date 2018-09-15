@@ -1,3 +1,5 @@
+const wasm = wasm_bindgen;
+
 window.onload = function() {
     let shellPrompt = "totally-not-fake-bash$ ";
 
@@ -41,9 +43,7 @@ window.onload = function() {
         }
     };
 
-    loadWasm().then(wasm => {
-        let exports = wasm.instance.exports;
-
+    wasm("wasm_bg.wasm").then(() => {
         xterm.write("\n" + shellPrompt);
 
         document.getElementById("termplay").firstElementChild.onchange = function(e) {
@@ -54,14 +54,7 @@ window.onload = function() {
                 let data = new Uint8Array(file.target.result);
                 let len = data.length;
 
-                let slice = exports.slice_new(len);
-                for (let i = 0; i < len; ++i) {
-                    exports.slice_set(slice, len, i, data[i]);
-                }
-
-                let offset = exports.image_to_string(slice, len);
-                exports.slice_free(slice, len);
-                let string = readCString(exports, offset);
+                let string = wasm.image_to_string(data);
 
                 xterm.write(string + "\r\n");
                 xterm.write(shellPrompt);
@@ -72,7 +65,7 @@ window.onload = function() {
         document.getElementById("insult").firstElementChild.onclick = function() {
             xterm.write("insult\r\n");
 
-            let string = readCStringUtf16(exports, exports.insult());
+            let string = wasm.insult();
 
             xterm.write(string + "\r\n");
             xterm.write(shellPrompt);
@@ -84,12 +77,12 @@ window.onload = function() {
             xterm.write("crappy-chess-minimax\r\n");
 
             if (p == null) {
-                p = exports.prompt_new();
+                p = wasm.prompt_new();
             }
 
             function prompt_print() {
-                let string = readCStringUtf16(exports, exports.prompt_print(p));
-                xterm.write(string);
+                let string = wasm.prompt_print(p);
+                xterm.write(string.replace(/\n/g, "\r\n"));
             }
 
             prompt_print();
@@ -98,21 +91,20 @@ window.onload = function() {
             lineHandler = function(line) {
                 if (line == null) {
                     lineHandler = null;
-                    exports.prompt_free(p);
+                    wasm.prompt_free(p);
                     p = null;
                 } else {
-                    let input = newCStringUtf16(exports, line);
+                    let input = line;
 
-                    let offset = exports.prompt_input(p, input);
-                    exports.free_utf16(input);
-                    let string = readCStringUtf16(exports, offset);
+                    let string = wasm.prompt_input(p, input);
 
-                    xterm.write(string + "\r\n");
+                    xterm.write(string.replace(/\n/g, "\r\n") + "\r\n");
                     prompt_print();
                 }
             };
         };
     }).catch(err => {
         xterm.write(wasmError.replace(/\n/g, "\r\n"));
+        console.log(err);
     });
 };

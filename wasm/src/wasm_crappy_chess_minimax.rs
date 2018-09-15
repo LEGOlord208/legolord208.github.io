@@ -1,4 +1,4 @@
-use ::*;
+use crate::*;
 use crappy_chess_minimax as chess;
 use std::str as stdstr;
 
@@ -18,8 +18,8 @@ fn read(prompt: &mut Prompt) -> String {
     combined
 }
 
-#[no_mangle]
-pub extern fn prompt_new() -> *mut Prompt {
+#[wasm_bindgen]
+pub fn prompt_new() -> *mut Prompt {
     let prompt = chess::input::Prompt {
         board: chess::make_board(),
         stdout: Vec::new(),
@@ -27,26 +27,21 @@ pub extern fn prompt_new() -> *mut Prompt {
     };
     Box::into_raw(Box::new(prompt))
 }
-#[no_mangle]
-pub extern fn prompt_print(prompt: *mut Prompt) -> *mut u16 {
+#[wasm_bindgen]
+pub fn prompt_print(prompt: *mut Prompt) -> String {
     let prompt = unsafe { &mut *prompt };
 
     prompt.print().unwrap();
-    let output = read(prompt);
-
-    to_utf16(&output)
+    read(prompt)
 }
-#[no_mangle]
-pub extern fn prompt_input(prompt: *mut Prompt, input: *mut u16) -> *mut u16 {
+#[wasm_bindgen]
+pub fn prompt_input(prompt: *mut Prompt, input: String) -> String {
     let prompt = unsafe { &mut *prompt };
-    let input = unsafe { from_utf16(input) };
 
     prompt.input(&input).unwrap();
-    let output = read(prompt);
-
-    to_utf16(&output)
+    read(prompt)
 }
-#[no_mangle]
-pub unsafe extern fn prompt_free(prompt: *mut Prompt) {
-    Box::from_raw(prompt);
+#[wasm_bindgen]
+pub fn prompt_free(prompt: *mut Prompt) {
+    unsafe { Box::from_raw(prompt); }
 }

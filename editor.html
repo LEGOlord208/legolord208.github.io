@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Some WASM interpreters/parsers</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="editor.css" />
+    <script src="vendor/ace/ace.js"></script>
+    <script src="mode-lolcode.js"></script>
+    <script src="wasm.js"></script>
+    <script src="editor.js"></script>
+</head>
+<body>
+    <header>
+        <select id="lang">
+            <option value="lci">LOLCODE</option>
+            <option value="nix">Nix</option>
+        </select>
+        <button id="run">Run code</button>
+    </header>
+    <div id="editor"></div>
+    <div id="output"></div>
+</body>
+</html>
