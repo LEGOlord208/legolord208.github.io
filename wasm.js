@@ -194,16 +194,31 @@
         }
     };
     
-    function freeMoveResult(ptr) {
+    const __wbg_call_09485fcf756eee36_target = Function.prototype.call || function() {
+        throw new Error(`wasm-bindgen: Function.prototype.call does not exist`);
+    };
+    
+    __exports.__wbg_call_09485fcf756eee36 = function(arg0, arg1, arg2, arg3, exnptr) {
+        try {
+            return addHeapObject(__wbg_call_09485fcf756eee36_target.call(getObject(arg0), getObject(arg1), getObject(arg2), getObject(arg3)));
+        } catch (e) {
+            const view = getUint32Memory();
+            view[exnptr / 4] = 1;
+            view[exnptr / 4 + 1] = addHeapObject(e);
+            
+        }
+    };
+    
+    function freeCanMove(ptr) {
         
-        wasm.__wbg_moveresult_free(ptr);
+        wasm.__wbg_canmove_free(ptr);
     }
     /**
     */
-    class MoveResult {
+    class CanMove {
         
         static __construct(ptr) {
-            return new MoveResult(ptr);
+            return new CanMove(ptr);
         }
         
         constructor(ptr) {
@@ -214,61 +229,43 @@
         /**
         * @returns {boolean}
         */
-        get success() {
+        get illegal() {
             if (this.ptr === 0) {
                 throw new Error('Attempt to use a moved value');
             }
-            return (wasm.__wbg_get_moveresult_success(this.ptr)) !== 0;
+            return (wasm.__wbg_get_canmove_illegal(this.ptr)) !== 0;
         }
-        set success(arg0) {
+        set illegal(arg0) {
             if (this.ptr === 0) {
                 throw new Error('Attempt to use a moved value');
             }
-            return wasm.__wbg_set_moveresult_success(this.ptr, arg0 ? 1 : 0);
+            return wasm.__wbg_set_canmove_illegal(this.ptr, arg0 ? 1 : 0);
         }
         free() {
             const ptr = this.ptr;
             this.ptr = 0;
-            freeMoveResult(ptr);
+            freeCanMove(ptr);
         }
         /**
         * @returns {string}
         */
-        from() {
+        check() {
             if (this.ptr === 0) {
                 throw new Error('Attempt to use a moved value');
             }
             const retptr = globalArgumentPtr();
-            wasm.moveresult_from(retptr, this.ptr);
+            wasm.canmove_check(retptr, this.ptr);
             const mem = getUint32Memory();
             const rustptr = mem[retptr / 4];
             const rustlen = mem[retptr / 4 + 1];
-            
-            const realRet = getStringFromWasm(rustptr, rustlen).slice();
-            wasm.__wbindgen_free(rustptr, rustlen * 1);
-            return realRet;
-            
-        }
-        /**
-        * @returns {string}
-        */
-        to() {
-            if (this.ptr === 0) {
-                throw new Error('Attempt to use a moved value');
-            }
-            const retptr = globalArgumentPtr();
-            wasm.moveresult_to(retptr, this.ptr);
-            const mem = getUint32Memory();
-            const rustptr = mem[retptr / 4];
-            const rustlen = mem[retptr / 4 + 1];
-            
+            if (rustptr === 0) return;
             const realRet = getStringFromWasm(rustptr, rustlen).slice();
             wasm.__wbindgen_free(rustptr, rustlen * 1);
             return realRet;
             
         }
     }
-    __exports.MoveResult = MoveResult;
+    __exports.CanMove = CanMove;
     
     class ConstructorToken {
         constructor(ptr) {
@@ -341,64 +338,6 @@
     }
     __exports.ChessTerm = ChessTerm;
     
-    function freeCanMove(ptr) {
-        
-        wasm.__wbg_canmove_free(ptr);
-    }
-    /**
-    */
-    class CanMove {
-        
-        static __construct(ptr) {
-            return new CanMove(ptr);
-        }
-        
-        constructor(ptr) {
-            this.ptr = ptr;
-            
-        }
-        
-        /**
-        * @returns {boolean}
-        */
-        get illegal() {
-            if (this.ptr === 0) {
-                throw new Error('Attempt to use a moved value');
-            }
-            return (wasm.__wbg_get_canmove_illegal(this.ptr)) !== 0;
-        }
-        set illegal(arg0) {
-            if (this.ptr === 0) {
-                throw new Error('Attempt to use a moved value');
-            }
-            return wasm.__wbg_set_canmove_illegal(this.ptr, arg0 ? 1 : 0);
-        }
-        free() {
-            const ptr = this.ptr;
-            this.ptr = 0;
-            freeCanMove(ptr);
-        }
-        /**
-        * @returns {string}
-        */
-        check() {
-            if (this.ptr === 0) {
-                throw new Error('Attempt to use a moved value');
-            }
-            const retptr = globalArgumentPtr();
-            wasm.canmove_check(retptr, this.ptr);
-            const mem = getUint32Memory();
-            const rustptr = mem[retptr / 4];
-            const rustlen = mem[retptr / 4 + 1];
-            if (rustptr === 0) return;
-            const realRet = getStringFromWasm(rustptr, rustlen).slice();
-            wasm.__wbindgen_free(rustptr, rustlen * 1);
-            return realRet;
-            
-        }
-    }
-    __exports.CanMove = CanMove;
-    
     function freeChessBoard(ptr) {
         
         wasm.__wbg_chessboard_free(ptr);
@@ -455,13 +394,14 @@
             
         }
         /**
-        * @returns {MoveResult}
+        * @param {any} arg0
+        * @returns {void}
         */
-        get_move() {
+        do_move(arg0) {
             if (this.ptr === 0) {
                 throw new Error('Attempt to use a moved value');
             }
-            return MoveResult.__construct(wasm.chessboard_get_move(this.ptr));
+            return wasm.chessboard_do_move(this.ptr, addHeapObject(arg0));
         }
     }
     __exports.ChessBoard = ChessBoard;

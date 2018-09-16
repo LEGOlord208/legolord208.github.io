@@ -30,14 +30,14 @@ $(document).ready(function() {
 
                     players_turn = false;
                     setTimeout(function() {
-                        players_turn = true;
-                        let reply = chess.get_move();
-                        if (!reply.success) {
-                            return;
-                        }
+                        let positions = {};
+                        let reply = chess.do_move(function(pos, square) {
+                            positions[pos.toLowerCase()] = square;
+                        });
 
-                        console.log(reply.from().toLowerCase() + "-" + reply.to().toLowerCase());
-                        board.move(reply.from().toLowerCase() + "-" + reply.to().toLowerCase());
+                        board.position(positions);
+
+                        players_turn = true;
                     }, 100);
                 }
             });

@@ -1,6 +1,8 @@
 use crate::*;
 use chess_minimax::{
     board::Board,
+    piece::PieceKind,
+    Pos,
     Side
 };
 use js_sys::Function;
@@ -73,22 +75,6 @@ impl CanMove {
         self.check.clone()
     }
 }
-#[wasm_bindgen]
-#[derive(Default)]
-pub struct MoveResult {
-    pub success: bool,
-    from: String,
-    to: String
-}
-#[wasm_bindgen]
-impl MoveResult {
-    pub fn from(&self) -> String {
-        self.from.clone()
-    }
-    pub fn to(&self) -> String {
-        self.to.clone()
-    }
-}
 
 const SIDE_PLAYER: Side = Side::White;
 const DEPTH: u8 = 6;
@@ -150,16 +136,35 @@ impl ChessBoard {
             check: None
         }
     }
-    pub fn get_move(&mut self) -> MoveResult {
-        self.0.minimax(DEPTH, !SIDE_PLAYER, None)
-            .map(|result| {
-                self.0.move_(result.from, result.to);
-                MoveResult {
-                    success: true,
-                    from: result.from.to_string(),
-                    to: result.to.to_string()
+    pub fn do_move(&mut self, apply: Function) {
+        if let Some(result) = self.0.minimax(DEPTH, !SIDE_PLAYER, None) {
+            self.0.move_(result.from, result.to);
+        }
+        for (y, row) in self.0.iter().enumerate() {
+            for (x, piece) in row.iter().enumerate() {
+                if let Some(piece) = piece {
+                    let mut string = String::with_capacity(2);
+
+                    string.push(match piece.side {
+                        Side::Black => 'b',
+                        Side::White => 'w'
+                    });
+                    string.push(match piece.kind {
+                        PieceKind::Pawn => 'P',
+                        PieceKind::Knight => 'N',
+                        PieceKind::Bishop => 'B',
+                        PieceKind::Rook => 'R',
+                        PieceKind::Queen => 'Q',
+                        PieceKind::King => 'K'
+                    });
+
+                    apply.call2(
+                        &JsValue::NULL,
+                        &JsValue::from(Pos(x as i8, y as i8).to_string()),
+                        &JsValue::from(string)
+                    ).unwrap();
                 }
-            })
-            .unwrap_or_default()
+            }
+        }
     }
 }
