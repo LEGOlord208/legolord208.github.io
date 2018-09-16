@@ -77,29 +77,24 @@ window.onload = function() {
             xterm.write("crappy-chess-minimax\r\n");
 
             if (p == null) {
-                p = wasm.prompt_new();
+                p = wasm.chess_new(xterm);
             }
 
-            function prompt_print() {
-                let string = wasm.prompt_print(p);
-                xterm.write(string.replace(/\n/g, "\r\n"));
-            }
-
-            prompt_print();
+            wasm.chess_draw(p);
+            xterm.write("> ");
 
             controls.classList.add("disabled");
             lineHandler = function(line) {
                 if (line == null) {
                     lineHandler = null;
-                    wasm.prompt_free(p);
+                    wasm.chess_free(p);
                     p = null;
                 } else {
                     let input = line;
 
-                    let string = wasm.prompt_input(p, input);
-
-                    xterm.write(string.replace(/\n/g, "\r\n") + "\r\n");
-                    prompt_print();
+                    wasm.chess_cmd(p, input);
+                    wasm.chess_draw(p);
+                    xterm.write("> ");
                 }
             };
         };

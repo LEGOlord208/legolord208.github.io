@@ -23,6 +23,7 @@ const defaultNix = `let
 in {
     x = inc 5;
 }`;
+
 const wasm = wasm_bindgen;
 
 window.onload = function() {

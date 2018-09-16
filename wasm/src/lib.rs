@@ -1,8 +1,6 @@
-extern crate wasm_bindgen;
+pub use wasm_bindgen::prelude::*;
 
-use wasm_bindgen::prelude::*;
-
-pub mod wasm_crappy_chess_minimax;
+pub mod wasm_chess_minimax;
 pub mod wasm_insult;
 pub mod wasm_lci;
 pub mod wasm_nix;
@@ -18,4 +16,8 @@ extern {
 
     #[wasm_bindgen(js_namespace = Math)]
     fn random() -> f64;
+
+    pub type Terminal;
+    #[wasm_bindgen(method)]
+    fn write(this: &Terminal, data: &str);
 }
