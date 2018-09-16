@@ -1,9 +1,8 @@
 [package]
 authors = ["jD91mZM2 <me@krake.one>"]
+edition = "2018"
 name = "wasm"
 version = "0.1.0"
-edition = "2018"
-
 [dependencies]
 image = "0.19.0"
 insult = "2.0.3"
@@ -14,9 +13,9 @@ rnix = "0.4.1"
 wasm-bindgen = "0.2.21"
 
 [dependencies.chess-minimax]
-git = "https://gitlab.com/jD91mZM2/chess-minimax"
 branch = "rewrite"
 features = ["terminal"]
+git = "https://gitlab.com/jD91mZM2/chess-minimax"
 
 [dependencies.termplay]
 default-features = false

@@ -5,13 +5,13 @@ use chess_minimax::{
 };
 use std::{
     collections::HashSet,
-    io,
+    io::{self, Write},
     str
 };
 
 pub struct JsWriter(Terminal);
 
-impl io::Write for JsWriter {
+impl Write for JsWriter {
     fn write(&mut self, data: &[u8]) -> io::Result<usize> {
         // Replace \n with \r\n
         let mut start = 0;
@@ -42,11 +42,17 @@ pub fn chess_new(terminal: Terminal) -> *mut Chess {
 }
 #[wasm_bindgen]
 pub fn chess_draw(s: *mut Chess) {
-    unsafe { &mut *s }.draw().unwrap();
+    let s = unsafe { &mut *s };
+    if let Err(err) = s.draw() {
+        writeln!(s.out, "{}", err).unwrap();
+    }
 }
 #[wasm_bindgen]
 pub fn chess_cmd(s: *mut Chess, input: &str) {
-    unsafe { &mut *s }.command(input).unwrap();
+    let s = unsafe { &mut *s };
+    if let Err(err) = s.command(input) {
+        writeln!(s.out, "{}", err).unwrap();
+    }
 }
 #[wasm_bindgen]
 pub fn chess_free(s: *mut Chess) {

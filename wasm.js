@@ -64,20 +64,34 @@
         
     };
     
+    const slab = [{ obj: undefined }, { obj: null }, { obj: true }, { obj: false }];
+    
+    let slab_next = slab.length;
+    
+    function addHeapObject(obj) {
+        if (slab_next === slab.length) slab.push(slab.length + 1);
+        const idx = slab_next;
+        const next = slab[idx];
+        
+        slab_next = next;
+        
+        slab[idx] = { obj, cnt: 1 };
+        return idx << 1;
+    }
     /**
-    * @returns {string}
+    * @param {any} arg0
+    * @returns {number}
     */
-    __exports.insult = function() {
-        const retptr = globalArgumentPtr();
-        wasm.insult(retptr);
-        const mem = getUint32Memory();
-        const rustptr = mem[retptr / 4];
-        const rustlen = mem[retptr / 4 + 1];
-        
-        const realRet = getStringFromWasm(rustptr, rustlen).slice();
-        wasm.__wbindgen_free(rustptr, rustlen * 1);
-        return realRet;
-        
+    __exports.chess_new = function(arg0) {
+        return wasm.chess_new(addHeapObject(arg0));
+    };
+    
+    /**
+    * @param {number} arg0
+    * @returns {void}
+    */
+    __exports.chess_draw = function(arg0) {
+        return wasm.chess_draw(arg0);
     };
     
     let cachedEncoder = new TextEncoder('utf-8');
@@ -90,13 +104,36 @@
         return [ptr, buf.length];
     }
     /**
-    * @param {string} arg0
+    * @param {number} arg0
+    * @param {string} arg1
+    * @returns {void}
+    */
+    __exports.chess_cmd = function(arg0, arg1) {
+        const [ptr1, len1] = passStringToWasm(arg1);
+        try {
+            return wasm.chess_cmd(arg0, ptr1, len1);
+            
+        } finally {
+            wasm.__wbindgen_free(ptr1, len1 * 1);
+            
+        }
+        
+    };
+    
+    /**
+    * @param {number} arg0
+    * @returns {void}
+    */
+    __exports.chess_free = function(arg0) {
+        return wasm.chess_free(arg0);
+    };
+    
+    /**
     * @returns {string}
     */
-    __exports.nix_parse = function(arg0) {
-        const [ptr0, len0] = passStringToWasm(arg0);
+    __exports.insult = function() {
         const retptr = globalArgumentPtr();
-        wasm.nix_parse(retptr, ptr0, len0);
+        wasm.insult(retptr);
         const mem = getUint32Memory();
         const rustptr = mem[retptr / 4];
         const rustlen = mem[retptr / 4 + 1];
@@ -140,8 +177,6 @@
     
     const stack = [];
     
-    const slab = [{ obj: undefined }, { obj: null }, { obj: true }, { obj: false }];
-    
     function getObject(idx) {
         if ((idx & 1) === 1) {
             return stack[idx >> 1];
@@ -157,58 +192,22 @@
         let varg1 = getStringFromWasm(arg1, arg2);
         __wbg_write_354580607841d1c9_target.call(getObject(arg0), varg1);
     };
-    
-    let slab_next = slab.length;
-    
-    function addHeapObject(obj) {
-        if (slab_next === slab.length) slab.push(slab.length + 1);
-        const idx = slab_next;
-        const next = slab[idx];
+    /**
+    * @param {string} arg0
+    * @returns {string}
+    */
+    __exports.nix_parse = function(arg0) {
+        const [ptr0, len0] = passStringToWasm(arg0);
+        const retptr = globalArgumentPtr();
+        wasm.nix_parse(retptr, ptr0, len0);
+        const mem = getUint32Memory();
+        const rustptr = mem[retptr / 4];
+        const rustlen = mem[retptr / 4 + 1];
         
-        slab_next = next;
+        const realRet = getStringFromWasm(rustptr, rustlen).slice();
+        wasm.__wbindgen_free(rustptr, rustlen * 1);
+        return realRet;
         
-        slab[idx] = { obj, cnt: 1 };
-        return idx << 1;
-    }
-    /**
-    * @param {any} arg0
-    * @returns {number}
-    */
-    __exports.chess_new = function(arg0) {
-        return wasm.chess_new(addHeapObject(arg0));
-    };
-    
-    /**
-    * @param {number} arg0
-    * @returns {void}
-    */
-    __exports.chess_draw = function(arg0) {
-        return wasm.chess_draw(arg0);
-    };
-    
-    /**
-    * @param {number} arg0
-    * @param {string} arg1
-    * @returns {void}
-    */
-    __exports.chess_cmd = function(arg0, arg1) {
-        const [ptr1, len1] = passStringToWasm(arg1);
-        try {
-            return wasm.chess_cmd(arg0, ptr1, len1);
-            
-        } finally {
-            wasm.__wbindgen_free(ptr1, len1 * 1);
-            
-        }
-        
-    };
-    
-    /**
-    * @param {number} arg0
-    * @returns {void}
-    */
-    __exports.chess_free = function(arg0) {
-        return wasm.chess_free(arg0);
     };
     
     /**
