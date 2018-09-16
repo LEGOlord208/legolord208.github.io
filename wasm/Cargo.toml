@@ -13,7 +13,6 @@ rnix = "0.4.1"
 wasm-bindgen = "0.2.21"
 
 [dependencies.chess-minimax]
-branch = "rewrite"
 features = ["terminal"]
 git = "https://gitlab.com/jD91mZM2/chess-minimax"
 

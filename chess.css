@@ -14,3 +14,7 @@
     background: yellow;
     transition: 100ms background;
 }
+#credits {
+    position: absolute;
+    bottom: 0;
+}
