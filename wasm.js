@@ -208,6 +208,64 @@
         }
     };
     
+    function freeCanMove(ptr) {
+        
+        wasm.__wbg_canmove_free(ptr);
+    }
+    /**
+    */
+    class CanMove {
+        
+        static __construct(ptr) {
+            return new CanMove(ptr);
+        }
+        
+        constructor(ptr) {
+            this.ptr = ptr;
+            
+        }
+        
+        /**
+        * @returns {boolean}
+        */
+        get illegal() {
+            if (this.ptr === 0) {
+                throw new Error('Attempt to use a moved value');
+            }
+            return (wasm.__wbg_get_canmove_illegal(this.ptr)) !== 0;
+        }
+        set illegal(arg0) {
+            if (this.ptr === 0) {
+                throw new Error('Attempt to use a moved value');
+            }
+            return wasm.__wbg_set_canmove_illegal(this.ptr, arg0 ? 1 : 0);
+        }
+        free() {
+            const ptr = this.ptr;
+            this.ptr = 0;
+            freeCanMove(ptr);
+        }
+        /**
+        * @returns {string}
+        */
+        check() {
+            if (this.ptr === 0) {
+                throw new Error('Attempt to use a moved value');
+            }
+            const retptr = globalArgumentPtr();
+            wasm.canmove_check(retptr, this.ptr);
+            const mem = getUint32Memory();
+            const rustptr = mem[retptr / 4];
+            const rustlen = mem[retptr / 4 + 1];
+            if (rustptr === 0) return;
+            const realRet = getStringFromWasm(rustptr, rustlen).slice();
+            wasm.__wbindgen_free(rustptr, rustlen * 1);
+            return realRet;
+            
+        }
+    }
+    __exports.CanMove = CanMove;
+    
     class ConstructorToken {
         constructor(ptr) {
             this.ptr = ptr;
@@ -281,64 +339,6 @@
         }
     }
     __exports.ChessBoard = ChessBoard;
-    
-    function freeCanMove(ptr) {
-        
-        wasm.__wbg_canmove_free(ptr);
-    }
-    /**
-    */
-    class CanMove {
-        
-        static __construct(ptr) {
-            return new CanMove(ptr);
-        }
-        
-        constructor(ptr) {
-            this.ptr = ptr;
-            
-        }
-        
-        /**
-        * @returns {boolean}
-        */
-        get illegal() {
-            if (this.ptr === 0) {
-                throw new Error('Attempt to use a moved value');
-            }
-            return (wasm.__wbg_get_canmove_illegal(this.ptr)) !== 0;
-        }
-        set illegal(arg0) {
-            if (this.ptr === 0) {
-                throw new Error('Attempt to use a moved value');
-            }
-            return wasm.__wbg_set_canmove_illegal(this.ptr, arg0 ? 1 : 0);
-        }
-        free() {
-            const ptr = this.ptr;
-            this.ptr = 0;
-            freeCanMove(ptr);
-        }
-        /**
-        * @returns {string}
-        */
-        check() {
-            if (this.ptr === 0) {
-                throw new Error('Attempt to use a moved value');
-            }
-            const retptr = globalArgumentPtr();
-            wasm.canmove_check(retptr, this.ptr);
-            const mem = getUint32Memory();
-            const rustptr = mem[retptr / 4];
-            const rustlen = mem[retptr / 4 + 1];
-            if (rustptr === 0) return;
-            const realRet = getStringFromWasm(rustptr, rustlen).slice();
-            wasm.__wbindgen_free(rustptr, rustlen * 1);
-            return realRet;
-            
-        }
-    }
-    __exports.CanMove = CanMove;
     
     function freeChessTerm(ptr) {
         

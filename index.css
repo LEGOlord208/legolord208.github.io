@@ -48,3 +48,12 @@ a {
     background: #135e00;
     border-radius: 0 10px 10px 0;
 }
+
+@media screen and (max-device-width: 600px) {
+    #controls {
+        flex-direction: column;
+    }
+    #controls div {
+        width: auto;
+    }
+}

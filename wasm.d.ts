@@ -7,6 +7,12 @@ export function insult(): string;
 
 export function nix_parse(arg0: string): string;
 
+export class CanMove {
+illegal: boolean
+free(): void;
+ check(): string;
+
+}
 export class ChessBoard {
 constructor(...args: any[]);
 free(): void;
@@ -15,12 +21,6 @@ static  new(): ChessBoard;
  can_move(arg0: string, arg1: string): CanMove;
 
  do_move(arg0: any): void;
-
-}
-export class CanMove {
-illegal: boolean
-free(): void;
- check(): string;
 
 }
 export class ChessTerm {
