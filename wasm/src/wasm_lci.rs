@@ -32,15 +32,11 @@ pub fn lci_eval(code: String) -> String {
     match lci::capture(&code, reader, |eval| {
         //eval.set_recursion_limit(32);
         eval.bind_func("ALERTIN", None, |values| {
-            unsafe {
-                alert(&join(values));
-            }
+            alert(&join(values));
             Value::Noob
         });
         eval.bind_func("LOGGIN", None, |values| {
-            unsafe {
-                log(&join(values));
-            }
+            log(&join(values));
             Value::Noob
         });
     }) {

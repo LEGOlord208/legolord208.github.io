@@ -16,8 +16,4 @@ extern {
 
     #[wasm_bindgen(js_namespace = Math)]
     fn random() -> f64;
-
-    pub type Terminal;
-    #[wasm_bindgen(method)]
-    fn write(this: &Terminal, data: &str);
 }

@@ -1,0 +1,16 @@
+#loading {
+    position: absolute;
+    top: 50vh;
+    left: 50vw;
+    transform: translate(-50%, -50%);
+}
+#board {
+    margin: auto;
+    margin-top: calc(100vh/2 - 400px/2);
+    width: 400px;
+    height: 400px;
+}
+#board .highlight {
+    background: yellow;
+    transition: 100ms background;
+}

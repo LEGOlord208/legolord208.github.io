@@ -71,29 +71,28 @@ window.onload = function() {
             xterm.write(shellPrompt);
         };
 
-        var p = null;
+        var chess = null;
 
         document.getElementById("chess").firstElementChild.onclick = function() {
-            xterm.write("crappy-chess-minimax\r\n");
+            xterm.write("chess-minimax\r\n");
 
-            if (p == null) {
-                p = wasm.chess_new(xterm);
+            if (chess == null) {
+                chess = new wasm.ChessTerm(data => xterm.write(data));
             }
 
-            wasm.chess_draw(p);
+            chess.draw();
             xterm.write("> ");
 
             controls.classList.add("disabled");
             lineHandler = function(line) {
                 if (line == null) {
                     lineHandler = null;
-                    wasm.chess_free(p);
-                    p = null;
+                    chess = null;
                 } else {
                     let input = line;
 
-                    wasm.chess_cmd(p, input);
-                    wasm.chess_draw(p);
+                    chess.command(input);
+                    chess.draw();
                     xterm.write("> ");
                 }
             };
