@@ -67,6 +67,7 @@ impl ChessTerm {
 #[wasm_bindgen]
 pub struct CanMove {
     pub illegal: bool,
+    pub checkmate: bool,
     check: Option<String>
 }
 #[wasm_bindgen]
@@ -95,14 +96,16 @@ impl ChessBoard {
             (Ok(from), Ok(to)) => (from, to),
             _ => return CanMove {
                 illegal: true,
-                check: None
+                check: None,
+                checkmate: false
             }
         };
 
         if board.get(from).map(|p| p.side != SIDE_PLAYER).unwrap_or(true) {
             return CanMove {
                 illegal: true,
-                check: None
+                check: None,
+                checkmate: false
             };
         }
 
@@ -118,7 +121,8 @@ impl ChessBoard {
         if !legal {
             return CanMove {
                 illegal: true,
-                check: None
+                check: None,
+                checkmate: false
             };
         }
 
@@ -127,16 +131,18 @@ impl ChessBoard {
             board.undo(undo);
             return CanMove {
                 illegal: true,
-                check: Some(checker.to_string())
+                check: Some(checker.to_string()),
+                checkmate: false
             };
         }
 
         CanMove {
             illegal: false,
-            check: None
+            check: None,
+            checkmate: self.0.is_checkmate(!SIDE_PLAYER)
         }
     }
-    pub fn do_move(&mut self, apply: Function) {
+    pub fn do_move(&mut self, apply: Function) -> bool {
         if let Some(result) = self.0.minimax(DEPTH, !SIDE_PLAYER, None) {
             self.0.move_(result.from, result.to);
         }
@@ -166,5 +172,6 @@ impl ChessBoard {
                 }
             }
         }
+        self.0.is_checkmate(SIDE_PLAYER)
     }
 }

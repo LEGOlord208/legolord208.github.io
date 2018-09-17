@@ -240,6 +240,21 @@
             }
             return wasm.__wbg_set_canmove_illegal(this.ptr, arg0 ? 1 : 0);
         }
+        /**
+        * @returns {boolean}
+        */
+        get checkmate() {
+            if (this.ptr === 0) {
+                throw new Error('Attempt to use a moved value');
+            }
+            return (wasm.__wbg_get_canmove_checkmate(this.ptr)) !== 0;
+        }
+        set checkmate(arg0) {
+            if (this.ptr === 0) {
+                throw new Error('Attempt to use a moved value');
+            }
+            return wasm.__wbg_set_canmove_checkmate(this.ptr, arg0 ? 1 : 0);
+        }
         free() {
             const ptr = this.ptr;
             this.ptr = 0;
@@ -271,74 +286,6 @@
             this.ptr = ptr;
         }
     }
-    
-    function freeChessBoard(ptr) {
-        
-        wasm.__wbg_chessboard_free(ptr);
-    }
-    /**
-    */
-    class ChessBoard {
-        
-        static __construct(ptr) {
-            return new ChessBoard(new ConstructorToken(ptr));
-        }
-        
-        constructor(...args) {
-            if (args.length === 1 && args[0] instanceof ConstructorToken) {
-                this.ptr = args[0].ptr;
-                return;
-            }
-            
-            // This invocation of new will call this constructor with a ConstructorToken
-            let instance = ChessBoard.new(...args);
-            this.ptr = instance.ptr;
-            
-        }
-        free() {
-            const ptr = this.ptr;
-            this.ptr = 0;
-            freeChessBoard(ptr);
-        }
-        /**
-        * @returns {ChessBoard}
-        */
-        static new() {
-            return ChessBoard.__construct(wasm.chessboard_new());
-        }
-        /**
-        * @param {string} arg0
-        * @param {string} arg1
-        * @returns {CanMove}
-        */
-        can_move(arg0, arg1) {
-            if (this.ptr === 0) {
-                throw new Error('Attempt to use a moved value');
-            }
-            const [ptr0, len0] = passStringToWasm(arg0);
-            const [ptr1, len1] = passStringToWasm(arg1);
-            try {
-                return CanMove.__construct(wasm.chessboard_can_move(this.ptr, ptr0, len0, ptr1, len1));
-                
-            } finally {
-                wasm.__wbindgen_free(ptr0, len0 * 1);
-                wasm.__wbindgen_free(ptr1, len1 * 1);
-                
-            }
-            
-        }
-        /**
-        * @param {any} arg0
-        * @returns {void}
-        */
-        do_move(arg0) {
-            if (this.ptr === 0) {
-                throw new Error('Attempt to use a moved value');
-            }
-            return wasm.chessboard_do_move(this.ptr, addHeapObject(arg0));
-        }
-    }
-    __exports.ChessBoard = ChessBoard;
     
     function freeChessTerm(ptr) {
         
@@ -404,6 +351,74 @@
         }
     }
     __exports.ChessTerm = ChessTerm;
+    
+    function freeChessBoard(ptr) {
+        
+        wasm.__wbg_chessboard_free(ptr);
+    }
+    /**
+    */
+    class ChessBoard {
+        
+        static __construct(ptr) {
+            return new ChessBoard(new ConstructorToken(ptr));
+        }
+        
+        constructor(...args) {
+            if (args.length === 1 && args[0] instanceof ConstructorToken) {
+                this.ptr = args[0].ptr;
+                return;
+            }
+            
+            // This invocation of new will call this constructor with a ConstructorToken
+            let instance = ChessBoard.new(...args);
+            this.ptr = instance.ptr;
+            
+        }
+        free() {
+            const ptr = this.ptr;
+            this.ptr = 0;
+            freeChessBoard(ptr);
+        }
+        /**
+        * @returns {ChessBoard}
+        */
+        static new() {
+            return ChessBoard.__construct(wasm.chessboard_new());
+        }
+        /**
+        * @param {string} arg0
+        * @param {string} arg1
+        * @returns {CanMove}
+        */
+        can_move(arg0, arg1) {
+            if (this.ptr === 0) {
+                throw new Error('Attempt to use a moved value');
+            }
+            const [ptr0, len0] = passStringToWasm(arg0);
+            const [ptr1, len1] = passStringToWasm(arg1);
+            try {
+                return CanMove.__construct(wasm.chessboard_can_move(this.ptr, ptr0, len0, ptr1, len1));
+                
+            } finally {
+                wasm.__wbindgen_free(ptr0, len0 * 1);
+                wasm.__wbindgen_free(ptr1, len1 * 1);
+                
+            }
+            
+        }
+        /**
+        * @param {any} arg0
+        * @returns {boolean}
+        */
+        do_move(arg0) {
+            if (this.ptr === 0) {
+                throw new Error('Attempt to use a moved value');
+            }
+            return (wasm.chessboard_do_move(this.ptr, addHeapObject(arg0))) !== 0;
+        }
+    }
+    __exports.ChessBoard = ChessBoard;
     
     function dropRef(idx) {
         

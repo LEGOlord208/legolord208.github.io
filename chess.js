@@ -11,12 +11,12 @@ $(document).ready(function() {
                 position: "start",
                 pieceTheme: "vendor/chessboard.js/img/chesspieces/wikipedia/{piece}.png",
                 draggable: true,
-                onDragStart: function() {
+                onDragStart: () => {
                     if (!players_turn) {
-                        return;
+                        return false;
                     }
                 },
-                onDrop: function(from, to) {
+                onDrop: (from, to) => {
                     let move = chess.can_move(from, to);
                     if (move.illegal) {
                         if (move.check() != null) {
@@ -29,15 +29,25 @@ $(document).ready(function() {
                     }
 
                     players_turn = false;
-                    setTimeout(function() {
+
+                    if (move.checkmate) {
+                        setTimeout(() => alert("You won!"), 1000);
+                        return;
+                    }
+
+                    setTimeout(() => {
                         let positions = {};
-                        let reply = chess.do_move(function(pos, square) {
+                        let checkmate = chess.do_move((pos, square) => {
                             positions[pos.toLowerCase()] = square;
                         });
 
                         board.position(positions);
 
                         players_turn = true;
+
+                        if (checkmate) {
+                            setTimeout(() => alert("You lost!"), 1000);
+                        }
                     }, 100);
                 }
             });
