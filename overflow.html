@@ -14,7 +14,7 @@
                 display: none;
             }
         </style>
-        <script src="assets/js/big.min.js"></script>
+        <script src="vendor/bignumber.min.js"></script>
     </head>
     <body>
 <pre><code>
@@ -234,16 +234,16 @@ Max int equation - Signed: (1 &lt;&lt; bits-1) - 1 Unsigned: (1 &lt;&lt; bits) -
                     wrap_output.value = 0;
                     return;
                 }
-                let min = document.getElementById(wrap_type.value + "-min").innerText;
-                let max = document.getElementById(wrap_type.value + "-max").innerText;
-                let num = Big(wrap_input.value);
+                let min = BigNumber(document.getElementById(wrap_type.value + "-min").innerText);
+                let max = BigNumber(document.getElementById(wrap_type.value + "-max").innerText);
+                let num = BigNumber(wrap_input.value);
 
-                let bits = Big(max).minus(min).plus(1);
+                let range = BigNumber(max).minus(min).plus(1);
                 while (num.gt(max)) {
-                    num = num.minus(bits);
+                    num = num.minus(range);
                 }
                 while (num.lt(min)) {
-                    num = num.plus(bits);
+                    num = num.plus(range);
                 }
                 wrap_output.value = num;
             });
