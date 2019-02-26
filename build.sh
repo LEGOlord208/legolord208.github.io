@@ -6,5 +6,6 @@ pushd wasm/
     cargo build --target wasm32-unknown-unknown --release
 popd
 wasm-bindgen wasm/target/wasm32-unknown-unknown/release/wasm.wasm --out-dir . --no-modules
+#wasm-bindgen wasm/target/wasm32-unknown-unknown/debug/wasm.wasm --out-dir . --no-modules
 
 python3 -m http.server

@@ -23,6 +23,7 @@ header {
     width: 50vw;
     height: calc(100vh - 32px);
     box-sizing: border-box;
+    overflow: auto;
     float: right;
     border-left: 1px solid white;
     white-space: pre;

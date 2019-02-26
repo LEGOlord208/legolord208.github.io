@@ -78,7 +78,7 @@ impl CanMove {
 }
 
 const SIDE_PLAYER: Side = Side::White;
-const DEPTH: u8 = 6;
+const DEPTH: u8 = 5;
 
 #[wasm_bindgen]
 pub struct ChessBoard(Board);

@@ -6,11 +6,12 @@ version = "0.1.0"
 [dependencies]
 image = "0.19.0"
 insult = "2.0.3"
-js-sys = "0.2.6"
+js-sys = "0.3.14"
 lci = "0.1.8"
-rand_core = "0.2.1"
-rnix = "0.4.1"
-wasm-bindgen = "0.2.21"
+rand_core = "0.4.0"
+rnix = "0.5.2"
+rowan = "0.3.3"
+wasm-bindgen = "0.2.37"
 
 [dependencies.chess-minimax]
 features = ["terminal"]

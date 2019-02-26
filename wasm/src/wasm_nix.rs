@@ -1,9 +1,19 @@
 use crate::*;
+use rowan::WalkEvent;
+use std::fmt::Write;
 
 #[wasm_bindgen]
 pub fn nix_parse(input: String) -> String {
-    match rnix::parse(&input) {
-        Ok(ast) => format!("{:#?}", ast),
-        Err(err) => err.to_string()
+    let mut output = String::new();
+    let mut indent = 0;
+    for event in rnix::parse(&input).node().preorder() {
+        match event {
+            WalkEvent::Enter(node) => {
+                writeln!(output, "{:indent$}{:?}", "", node, indent=indent).unwrap();
+                indent += 2;
+            },
+            WalkEvent::Leave(_) => indent -= 2
+        }
     }
+    output
 }
